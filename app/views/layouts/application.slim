@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title
+      | FootballSchool
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    - if logged_in?
+      .container-sm
+        .row
+          .col-sm
+            = render 'layouts/navbar'
+      button#back-to-top.btn.btn-outline-secondary.back-to-top role='button'
+        i.fas.fa-chevron-up
+
+    - if flash[:notice]
+      .container-sm
+        .row
+          .col-sm
+            .alert.alert-success.alert-dismissible.fade.show.mt-2
+              strong= flash[:notice]
+              button.close{ aria-label='Close' data-dismiss='alert' type='button' }
+                span{ aria-hidden='true'} &times;
+    = yield
+    = javascript_packs_with_chunks_tag 'app'

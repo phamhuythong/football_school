@@ -1,0 +1,8 @@
+- field_name ||= field
+- value ||= ''
+= form_with url: url, method: :get, local: true, class: 'form-inline index-search-form', id: 'index-search-form' do |f|
+  = f.text_field field, value: value, placeholder: field_name
+  button class="ml-1 btn btn-sm #{btn_submit}" type='submit'
+    i.fa.fa-search
+
+= javascript_packs_with_chunks_tag 'modules/index_search_form'

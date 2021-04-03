@@ -1,0 +1,21 @@
+.container-sm
+  = index_header header: t('.teacher_list'), new_url: new_user_path
+
+  .row
+    .col-sm.table-responsive-sm
+      table.table class=table_style
+        thead
+          tr
+            th scope='col' #
+            th scope='col' = t('common.code')
+            th scope='col' = t('common.teacher')
+            th scope='col'
+        tbody
+          - @users.each_with_index do |obj, index|
+            tr
+              th.align-middle scope='row' = obj.id
+              td.align-middle= obj.code
+              td.align-middle= obj.full_name
+              td= modification_buttons urls: { edit_url: edit_user_path(obj), delete_url: user_path(obj) }
+
+  = index_pagination data: @users

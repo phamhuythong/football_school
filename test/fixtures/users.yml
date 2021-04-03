@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  account_id: 1
+  first_name: MyString
+  last_name: MyString
+  middle_name: MyString
+  date_of_birth: 2021-03-07 16:26:38
+  phone: MyString
+  mother_name: MyString
+  mother_phone: MyString
+  father_name: MyString
+  father_phone: MyString
+  locked: 1
+
+two:
+  code: MyString
+  account_id: 1
+  first_name: MyString
+  last_name: MyString
+  middle_name: MyString
+  date_of_birth: 2021-03-07 16:26:38
+  phone: MyString
+  mother_name: MyString
+  mother_phone: MyString
+  father_name: MyString
+  father_phone: MyString
+  locked: 1

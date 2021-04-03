@@ -1,0 +1,20 @@
+---
+vi:
+  students:
+    all_students: Tất Cả Học Viên
+    register_date: Ngày Đăng Ký
+    start_date: Ngày Nhập Học
+    course_list: Danh Sách Lớp Học
+    new_course: Thêm Lớp Học
+    receipt_list: Danh Sách Biên Lai
+    index:
+      student_list: Danh Sách Học Viên
+    new:
+      title: Thêm Học Viên
+    edit:
+      title: Cập Nhật Học Viên
+    student_courses:
+      new:
+        title: Thêm Thông Tin Lớp
+      edit:
+        title: Cập Nhật Thông Tin Lớp

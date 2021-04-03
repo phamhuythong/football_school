@@ -1,0 +1,14 @@
+= content_for :table_body do
+  thead
+    tr
+      th scope='col' = t('common.stadium_group')
+      th scope='col' = t('common.information')
+      th scope='col'
+  tbody
+    - @stadium_groups.each_with_index do |obj, index|
+      tr
+        td.align-middle= obj.name
+        td.align-middle= obj.info
+        td= modification_buttons urls: { edit_url: edit_stadium_group_path(obj), delete_url: stadium_group_path(obj) }
+
+= render 'shared/index', header: t('.stadium_group_list'), new_url: new_stadium_group_path, data: @stadium_groups

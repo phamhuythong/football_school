@@ -1,0 +1,8 @@
+---
+vi:
+  sessions:
+    new:
+      email: Email
+      password: Mật Khẩu
+      submit: Đăng Nhập
+      invalid_email_password: Email hoặc Mật Khẩu không đúng.

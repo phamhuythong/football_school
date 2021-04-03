@@ -1,0 +1,21 @@
+- paging = true if local_assigns[:paging].nil?
+.container-sm.mt-2
+  .row
+    .col-sm
+      .text-sm-center
+        h2= header
+      .row
+        .col-sm-1.d-flex.align-middle
+          = link_to t('buttons.new'), new_url, class: "btn #{btn_new}"
+        = content_for :filter_object
+        = content_for :search_object
+
+  .row.mt-2
+    .col-sm
+      .table-responsive-sm
+        table.table class=table_style
+          = content_for :table_body
+  - if paging
+    .row
+      .col-sm.d-flex.justify-content-end
+        = paginate data

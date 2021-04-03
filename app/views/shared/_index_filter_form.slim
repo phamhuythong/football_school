@@ -1,0 +1,7 @@
+- field_name ||= field
+- selected ||= ''
+= form_with url: url, method: :get, local: true, class: 'index-filter-form', id: 'index-filter-form' do |f|
+  = f.collection_select field, collection, value_method, text_method, { include_blank: field_name, selected: selected },
+                        { class: 'form-control form-control-inline', id: 'index-filter-select' }
+
+= javascript_packs_with_chunks_tag 'modules/index_filter_form'

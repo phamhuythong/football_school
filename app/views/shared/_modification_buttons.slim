@@ -1,0 +1,6 @@
+- enable_delete ||= false
+.text-sm-right
+  = link_to t('buttons.edit'), edit_url, class: "btn #{btn_edit}"
+  - if enable_delete
+    = link_to t('buttons.delete'), delete_url, method: :delete, data: { confirm: t('confirmations.delete') },
+                                               class: "btn #{btn_delete} ml-sm-1"

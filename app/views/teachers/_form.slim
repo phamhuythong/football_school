@@ -1,0 +1,20 @@
+= form_with model: form, url: url, method: method, local: true, class: 'teacher-form' do |f|
+  .row
+    .col-sm-4.col-xs-4
+      = text form: f, field: :last_name, field_name: t('common.last_name')
+    .col-sm-4.col-xs-4
+      = text form: f, field: :middle_name, field_name: t('common.middle_name')
+    .col-sm-4.col-xs-4
+      = text form: f, field: :first_name, field_name: t('common.first_name')
+  .row
+    .col-sm-4
+      = date form: f, field: :date_of_birth, field_name: t('common.dob')
+    .col-sm-4
+      = collection_radios form: f, field: :gender, collection: ['Nam', 'Nữ', 'Khác'], value_method: :to_s, text_method: :to_s,
+                    field_name: t('common.gender')
+  .row
+    .col-sm-8
+      = text form: f, field: :address, field_name: t('common.address')
+    .col-sm-4
+      = text form: f, field: :phone, field_name: t('common.phone')
+  = submit form: f, back_url: teachers_path

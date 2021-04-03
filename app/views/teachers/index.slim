@@ -1,0 +1,14 @@
+= content_for :table_body do
+  thead
+    tr
+      th scope='col' #
+      th scope='col' = t('common.teacher')
+      th scope='col'
+  tbody
+    - @teachers.each_with_index do |obj, index|
+      tr
+        td.align-middle= obj.code
+        td.align-middle= obj.full_name
+        td= modification_buttons urls: { edit_url: edit_teacher_path(obj), delete_url: teacher_path(obj) }
+
+= render 'shared/index', header: t('.teacher_list'), new_url: new_teacher_path, data: @teachers

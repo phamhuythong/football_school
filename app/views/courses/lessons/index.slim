@@ -1,0 +1,18 @@
+= content_for :table_body do
+  thead
+    tr
+      th scope='col' = t('courses.hold_date')
+      th scope='col' = t('courses.roll_up_date')
+      th scope='col' = t('courses.attendance')
+      th scope='col' = t('courses.absence')
+      th scope='col'
+  tbody
+    - @lessons.each_with_index do |obj, index|
+      tr
+        th.align-middle= link_to date_format(obj.hold_date), ''
+        td.align-middle= date_format(obj.created_at)
+        td.align-middle=
+        td.align-middle=
+        td= modification_buttons urls: { edit_url: edit_course_lesson_path(params[:course_id], obj) }
+
+= render 'shared/index', header: t('.lesson_list'), new_url: new_course_lesson_path(params[:course_id]), data: @lessons

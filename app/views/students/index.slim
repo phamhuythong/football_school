@@ -1,0 +1,27 @@
+= content_for :filter_object do
+  .col-sm-3.d-flex.align-middle
+    = render partial: 'shared/index_filter_form', locals: { url: students_path, field: :course, collection: @courses, value_method: :id,
+                                                  text_method: :name, field_name: t('students.all_students'), selected: params[:course] }
+= content_for :search_object do
+  .col-sm-3.d-flex.align-middle
+    = render partial: 'shared/index_search_form', locals: { url: students_path, field: :first_name, field_name: t('common.first_name'),
+                                          value: params[:first_name] }
+
+= content_for :table_body do
+  thead
+    tr
+      th scope='col' #
+      th scope='col' = t('common.student')
+      th scope='col' = t('common.dob')
+      th scope='col' = t('common.address')
+      th scope='col'
+  tbody
+    - @students.each_with_index do |obj, index|
+      tr
+        th.align-middle= link_to obj.code, student_path(obj)
+        th.align-middle= link_to obj.full_name, student_path(obj)
+        td.align-middle= date_format(obj.date_of_birth)
+        td.align-middle= obj.address
+        td= modification_buttons urls: { edit_url: edit_student_path(obj), delete_url: student_path(obj) }
+
+= render 'shared/index', header: t('.student_list'), new_url: new_student_path, data: @students

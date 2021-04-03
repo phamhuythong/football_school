@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  country: MyString
+  state: MyString
+  city: MyString
+  ward: MyString
+  postal_code: MyString
+  address1: MyString
+  address2: MyString
+  phone: MyString
+  addressable_id: 1
+  addressabe_type: MyString
+  locked: 1
+
+two:
+  country: MyString
+  state: MyString
+  city: MyString
+  ward: MyString
+  postal_code: MyString
+  address1: MyString
+  address2: MyString
+  phone: MyString
+  addressable_id: 1
+  addressabe_type: MyString
+  locked: 1

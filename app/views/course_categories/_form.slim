@@ -1,0 +1,4 @@
+= form_with model: form, url: url, method: method, local: true, class: 'course-category-form' do |f|
+  = text form: f, field: :name, field_name: t('common.course_category')
+  = text form: f, field: :info, field_name: t('common.information')
+  = submit form: f, back_url: course_categories_path

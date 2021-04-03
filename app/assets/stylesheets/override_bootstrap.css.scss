@@ -1,0 +1,21 @@
+.invalid-feedback {
+  display: inline-block !important;
+}
+
+.page-item .page-link {
+  color: #6c757d !important
+}
+
+.page-item.active .page-link {
+  color: #fff !important;
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+}
+
+.form-control-no-border {
+  border: none !important;
+}
+
+.form-control-inline {
+  display: inline-block !important;
+}

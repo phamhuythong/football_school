@@ -1,0 +1,57 @@
+.container-sm.mt-2
+  .row
+    .col-sm
+      .text-sm-center
+        h2= @student.full_name
+  .row.mt-2
+    .col-sm-4
+      = "#{t('common.dob')}: #{date_format(@student.date_of_birth)}"
+    .col-sm-4
+      = "#{t('common.gender')}: #{@student.gender}"
+  .row
+    .col-sm
+      = "#{t('common.address')}: #{@student.address}"
+  .row
+    .col-sm-4
+      = "#{t('common.phone')}: #{@student.phone}"
+  .row
+    .col-sm-4
+      = "#{t('common.mother_name')}: #{@student.mother_name}"
+    .col-sm-4
+      = "#{t('common.mother_phone')}: #{@student.mother_phone}"
+  .row
+    .col-sm-4
+      = "#{t('common.father_name')}: #{@student.father_name}"
+    .col-sm-4
+      = "#{t('common.father_phone')}: #{@student.father_phone}"
+  .row.mt-2
+    .col-sm-2
+      = link_to t('students.course_list'), student_student_courses_path(@student), class: "btn btn-sm #{btn_general}"
+    .col-sm-2
+      = link_to t('students.receipt_list'), student_student_courses_path(@student), class: "btn btn-sm #{btn_general}"
+
+.container-sm.mt-3
+  .row
+    .col-sm-3
+      h4= t('students.course_list')
+    .col-sm-3
+      = link_to t('students.new_course'), new_student_student_course_path(@student), class: "btn btn-sm #{btn_new}"
+  .row.mt-2
+    .col-sm-3
+      strong= t('common.course')
+    .col-sm-3
+      strong= t('students.register_date')
+    .col-sm-3
+      strong= t('students.start_date')
+    .row-sm-3
+  - @student_courses.each do |c|
+    .row.mt-1
+      .col-sm-3.align-middle= c.course.name
+      .col-sm-3.align-middle= c.register_date
+      .col-sm-3.align-middle= c.start_date
+      .col-sm-3.align-middle
+        = modification_buttons urls: { edit_url: edit_student_student_course_path(@student, c), delete_url: student_student_course_path(@student, c), enable_delete: true }
+  .row.mt-2
+    .col-sm
+      - back_url = params[:course_id] ? course_path(params[:course_id]) : students_path
+      strong= link_to "< #{t('buttons.back')}", back_url

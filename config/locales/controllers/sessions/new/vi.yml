@@ -1,0 +1,5 @@
+---
+vi:
+  sessions:
+    new:
+      invalid_email_password: Email hoặc Mật Khẩu không đúng.

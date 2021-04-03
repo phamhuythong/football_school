@@ -1,0 +1,7 @@
+= form_with model: form, url: url, method: method, local: true, class: 'user-form' do |f|
+  = hidden form: f, field: :type
+  = text form: f, field: :code, field_name: t('common.code')
+  = text form: f, field: :last_name, field_name: t('common.last_name')
+  = text form: f, field: :middle_name, field_name: t('common.middle_name')
+  = text form: f, field: :first_name, field_name: t('common.first_name')
+  = submit form: f, back_url: users_path

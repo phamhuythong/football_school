@@ -1,0 +1,92 @@
+---
+vi:
+  common:
+    home: Trang Chủ
+    information: Thông Tin
+    stadium_group: Cụm Sân
+    stadium: Sân
+    course_category: Khóa Học
+    course: Lớp
+    teacher: Giáo Viên
+    student: Học Viên
+    select: Chọn %{object}
+    address: Địa Chỉ
+    code: Mã
+    first_name: Tên
+    middle_name: Tên Lót
+    last_name: Họ
+    account: Tài Khoản
+    dob: Ngày Sinh
+    gender: Giới Tính
+    type: Loại Người Dùng
+    phone: Điện Thoại
+    mother_name: Họ Tên Mẹ
+    mother_phone: Điện Thoại Mẹ
+    father_name: Họ Tên Cha
+    father_phone: Điện Thoại Cha
+    full_name: Họ Và Tên
+    start_time: Giờ Bắt Đầu
+    end_time: Giờ Kết thúc
+    start_date: Ngày Bắt Đầu
+    end_date: Ngày Kết Thúc
+    note: Ghi Chú
+  buttons:
+    logout: Đăng Xuất
+    new: Thêm
+    edit: Chỉnh Sửa
+    delete: Xóa
+    update: Cập Nhật
+    submit: Lưu
+    cancel: Hủy
+    search: Tìm Kiếm
+    back: Quay Lại
+  confirmations:
+    delete: Bạn Chắc Chắn Xóa?
+  notices:
+    save: Lưu Thành Công
+    delete: Xóa Thành Công
+  errors:
+    format: '%{message}'
+    messages:
+      unknown: Lỗi khi lưu. Vui lòng thử lại sau.
+      present: đã tồn tại
+      inclusion: bao gồm
+      exclusion: loại trừ
+      invalid: không hợp lệ
+      confirmation: không khớp
+      accepted: cần đồng ý
+      empty: không để trống
+      blank: không để trống
+      too_long: quá dài (tối đa %{count} ký tự)
+      too_short: quá ngắn (tối thiểu %{count} ký tự)
+      wrong_length: độ dài không đúng (%{count} ký tự)
+      taken: đã tồn tại
+      not_a_number: không phải là kiểu số
+      greater_than: phải lớn hơn %{count}
+      greater_than_or_equal_to: phải lớn hơn hoặc bằng %{count}
+      equal_to: phải bằng %{count}
+      less_than: phải nhỏ hơn %{count}
+      less_than_or_equal_to: phải nhỏ hơn hoặc bằng {count}
+      odd: phải là số lẻ
+      even: phải là số chẵn
+      invalid_date: 'dd-mm-yyyy: 01-01-2001'
+  activerecord:
+    errors:
+      messages:
+        record_invalid: record không hợp lệ
+  views:
+    pagination:
+      first: '<<'
+      last: '>>'
+      previous: '<'
+      next: '>'
+      truncate: '…'
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: Không tìm thấy %{entry_name}
+          one: 'Có <b>1</b> %{entry_name}'
+          other: 'Có <b>tất cả %{count}</b> %{entry_name}'
+      more_pages:
+        display_entries: 'Hiển thị %{entry_name} <b>%{first} - %{last}</b> trong <b>%{total}</b>'

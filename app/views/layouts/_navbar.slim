@@ -1,0 +1,30 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  = link_to root_path, class: 'navbar-brand' do
+    = image_tag 'logo.jpg', class: 'navbar-logo', alt: 'logo'
+  button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"
+    span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item*{class: (params[:controller] == 'stadium_groups' ? 'active' : '')}
+        = link_to stadium_groups_path, class: 'nav-link' do
+          = t('common.stadium_group')
+      li.nav-item*{class: (params[:controller] == 'stadia' ? 'active' : '')}
+        = link_to stadia_path, class: 'nav-link' do
+          = t('common.stadium')
+      li.nav-item*{class: (params[:controller] == 'course_categories' ? 'active' : '')}
+        = link_to course_categories_path, class: 'nav-link' do
+          = t('common.course_category')
+      li.nav-item*{class: (params[:controller] == 'courses' ? 'active' : '')}
+        = link_to courses_path, class: 'nav-link' do
+          = t('common.course')
+      li.nav-item*{class: (params[:controller] == 'teachers' ? 'active' : '')}
+        = link_to teachers_path, class: 'nav-link' do
+          = t('common.teacher')
+      li.nav-item*{class: (params[:controller] == 'students' ? 'active' : '')}
+        = link_to students_path, class: 'nav-link' do
+          = t('common.student')
+    - if logged_in?
+      .navbar-text
+        = link_to t('buttons.logout'), logout_path, method: :delete, class: ''
+
+

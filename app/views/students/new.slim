@@ -1,0 +1,6 @@
+.container-sm
+  .row
+    .col-sm
+      .text-center
+        h2= t('.title')
+  = render 'form', form: @form, url: students_url, method: :post

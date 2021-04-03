@@ -1,0 +1,22 @@
+---
+vi:
+  courses:
+    roll_up: Điểm Danh
+    all_courses: Tất Cả Lớp
+    hold_date: Ngày Học
+    roll_up_date: Ngày Điểm Danh
+    attendance: Có Mặt
+    absence: Vắng Mặt
+    index:
+      course_list: Danh Sách Lớp Học
+    new:
+      title: Thêm Lớp Học
+    edit:
+      title: Cập Nhật Lớp Học
+    show:
+      new: Thêm Học Viên
+    lessons:
+      index:
+        lesson_list: Thông Tin Điểm Danh
+      new:
+        title: Điểm Danh

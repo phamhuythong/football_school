@@ -1,0 +1,46 @@
+= form_with model: form, url: url, method: method, local: true, class: 'student-form' do |f|
+  - if params[:course_id]
+    = hidden_field_tag :course_id, params[:course_id]
+  .row
+    .col-sm-4.col-xs-4
+      = text form: f, field: :last_name, field_name: t('common.last_name')
+    .col-sm-4.col-xs-4
+      = text form: f, field: :middle_name, field_name: t('common.middle_name')
+    .col-sm-4.col-xs-4
+      = text form: f, field: :first_name, field_name: t('common.first_name')
+  .row
+    .col-sm-4
+      = date form: f, field: :date_of_birth, field_name: t('common.dob')
+    .col-sm-4
+      = collection_radios form: f, field: :gender, collection: ['Nam', 'Nữ', 'Khác'], value_method: :to_s, text_method: :to_s,
+                    field_name: t('common.gender')
+  .row
+    .col-sm-8
+      = text form: f, field: :address, field_name: t('common.address')
+    .col-sm-4
+      = text form: f, field: :phone, field_name: t('common.phone')
+  - unless form.exist?
+    .row
+      .col-sm-4
+        = dropdown form: f, field: :course_id, collection: form.courses, value_method: :id, text_method: :name, field_name: t('common.course')
+      .col-sm-4
+        = date form: f, field: :register_date, field_name: t('students.register_date')
+      .col-sm-4
+        = date form: f, field: :start_date, field_name: t('students.start_date')
+  / = collection_checkboxes form: f, field: :course_ids, field_name: t('common.course'),
+             collection: form.courses, value_method: :id, text_method: :name, class_name: 'checkboxes-course'
+  .row
+    .col-sm-6
+      = text form: f, field: :mother_name, field_name: t('common.mother_name')
+    .col-sm-6
+      = text form: f, field: :mother_phone, field_name: t('common.mother_phone')
+  .row
+    .col-sm-6
+      = text form: f, field: :father_name, field_name: t('common.father_name')
+    .col-sm-6
+      = text form: f, field: :father_phone, field_name: t('common.father_phone')
+
+  - back_url = params[:course_id] ? course_path(params[:course_id]) : students_path
+  = submit form: f, back_url: back_url
+
+= javascript_packs_with_chunks_tag 'students/form'

@@ -1,0 +1,14 @@
+= form_with model: form, url: url, method: method, local: true, class: 'student-course-form' do |f|
+  .row
+    .col-sm-4
+      - if form.exist?
+        .form-group
+          = f.label t('common.course')
+          = f.text_field :course_name, class: 'form-control', disabled: true
+      - else
+        = dropdown form: f, field: :course_id, collection: form.courses, value_method: :id, text_method: :name, field_name: t('common.course')
+    .col-sm-4
+      = date form: f, field: :register_date, field_name: t('students.register_date')
+    .col-sm-4
+      = date form: f, field: :start_date, field_name: t('students.start_date')
+  = submit form: f, back_url: student_path(params[:student_id])

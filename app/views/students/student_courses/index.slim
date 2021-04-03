@@ -1,0 +1,47 @@
+/ .container-sm.mt-3
+/   .row
+/     .col-sm.text-center
+/       h2= t('students.course_list')
+/   .row
+/     .col-sm-3
+/       = link_to t('students.new_course'), new_student_student_course_path(@student), class: "btn btn-sm #{btn_new}"
+/   .row.mt-2
+/     .col-sm-3
+/       strong= t('common.course')
+/     .col-sm-3
+/       strong= t('students.register_date')
+/     .col-sm-3
+/       strong= t('students.start_date')
+/     .row-sm-3
+/   - @student_courses.each do |c|
+/     .row.mt-1
+/       .col-sm-3.align-middle= c.course.name
+/       .col-sm-3.align-middle= c.register_date
+/       .col-sm-3.align-middle= c.start_date
+/       .col-sm-3.align-middle
+/         = modification_buttons urls: { edit_url: edit_student_student_course_path(@student, c), delete_url: student_student_course_path(@student, c) }, enable_delete: true
+/   .row.mt-2
+/     .col-sm
+/       strong= link_to "< #{t('buttons.back')}", student_path(@student)
+
+= content_for :table_body do
+  thead
+    tr
+      th scope='col' = t('common.course')
+      th scope='col' = t('students.register_date')
+      th scope='col' = t('students.start_date')
+      th scope='col'
+  tbody
+    - @student_courses.each do |obj|
+      tr
+        th.align-middle= obj.course.name
+        td.align-middle= obj.register_date
+        td.align-middle= obj.start_date
+        td.align-middle
+          = modification_buttons urls: { edit_url: edit_student_student_course_path(@student, obj), delete_url: student_student_course_path(@student, obj) }, enable_delete: true
+
+= render 'shared/index', header: t('students.course_list'), new_url: new_student_student_course_path(@student), paging: false
+.container-sm
+  .row
+    .col-sm
+      strong= link_to "< #{t('buttons.back')}", student_path(@student)

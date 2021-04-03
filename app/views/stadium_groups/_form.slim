@@ -1,0 +1,4 @@
+= form_with model: form, url: url, method: method, local: true, class: 'stadium-group-form' do |f|
+  = text form: f, field: :name, field_name: t('common.stadium_group')
+  = text form: f, field: :info, field_name: t('common.information')
+  = submit form: f, back_url: stadium_groups_path

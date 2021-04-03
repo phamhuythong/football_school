@@ -1,0 +1,9 @@
+---
+vi:
+  users:
+    index:
+      user_list: Danh Sách User
+    new:
+      title: Thêm User
+    edit:
+      title: Cập Nhật User

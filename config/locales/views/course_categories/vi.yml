@@ -1,0 +1,9 @@
+---
+vi:
+  course_categories:
+    index:
+      course_category_list: Danh Sách Khóa Học
+    new:
+      title: Thêm Khóa Học
+    edit:
+      title: Cập Nhật Khóa Học

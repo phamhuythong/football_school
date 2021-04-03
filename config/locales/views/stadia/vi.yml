@@ -1,0 +1,10 @@
+---
+vi:
+  stadia:
+    all_stadia: Tất Cả Sân
+    index:
+      stadium_list: Danh Sách Sân
+    new:
+      title: Thêm Sân
+    edit:
+      title: Cập Nhật Sân

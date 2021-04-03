@@ -1,0 +1,9 @@
+---
+vi:
+  stadium_groups:
+    index:
+      stadium_group_list: Danh Sách Cụm Sân
+    new:
+      title: Thêm Cụm Sân
+    edit:
+      title: Cập Nhật Cụm Sân

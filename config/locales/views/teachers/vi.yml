@@ -1,0 +1,9 @@
+---
+vi:
+  teachers:
+    index:
+      teacher_list: Danh Sách Giáo Viên
+    new:
+      title: Thêm Giáo Viên
+    edit:
+      title: Cập Nhật Giáo Viên
