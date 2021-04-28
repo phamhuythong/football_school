@@ -9,7 +9,15 @@ class SessionsController < ApplicationController
   end
 
   def create
-    account = Account.find_by!(email: session_params[:email].downcase)
+    # account = Account.find_by!(email: session_params[:email].downcase)
+    if session_params[:account].blank?
+      flash.now[:alert] = true
+      render :new
+      return
+    end
+
+    acc = session_params[:account].downcase
+    account = Account.where('lower(email) = ? OR lower(username) = ?', acc, acc).first
     if account&.authenticate(session_params[:password])
       log_in account
       redirect_to root_url
@@ -27,6 +35,6 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params.require(:session).permit(:email, :username, :password)
+    params.require(:session).permit(:account, :email, :username, :password)
   end
 end

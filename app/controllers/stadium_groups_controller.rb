@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class StadiumGroupsController < ApplicationController
+  before_action :pundit_authorize
+
   def index
     @stadium_groups = StadiumGroup.active.order(:id).page(params[:page]).per(PAGE)
   end
@@ -37,5 +39,9 @@ class StadiumGroupsController < ApplicationController
     @stadium_group = StadiumGroup.active.find(params[:id])
     @stadium_group.update!(deleted: true)
     redirect_to stadium_groups_path, notice: I18n.t('notices.delete')
+  end
+
+  def pundit_authorize
+    authorize StadiumGroup
   end
 end

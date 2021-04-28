@@ -12,17 +12,19 @@ Rails.application.routes.draw do
   resources :stadia, concerns: :paginatable
   resources :course_categories, concerns: :paginatable
   resources :courses, concerns: :paginatable do
-    with_options module: :courses do
+    scope module: :courses do
       resources :lessons
     end
   end
   resources :users, concerns: :paginatable
   resources :students, concerns: :paginatable do
-    with_options module: :students do
-      resources :student_courses
+    scope module: :students do
+    resources :student_courses
+    resources :student_receipts
     end
   end
   resources :teachers, concerns: :paginatable
+  resources :receipt_categories, concerns: :paginatable
 
   root to: 'homes#index'
 

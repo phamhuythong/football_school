@@ -6,6 +6,9 @@ class CreateStudentCourses < ActiveRecord::Migration[6.0]
       t.date :register_date
       t.date :start_date
       t.date :end_date
+      t.integer :attendances, limit: 2, default: 0
+      t.integer :absences, limit: 2, default: 0
+      t.integer :total_lessons, limit: 2, default: 0
       t.integer :lock_version, default: 0
       t.boolean :deleted, default: false
       t.index :student_id

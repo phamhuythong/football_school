@@ -8,9 +8,19 @@ module ApplicationHelper
     presenter
   end
 
-  def date_format(date)
+  def format_date(date)
     return '' unless date
 
     date.strftime('%d-%m-%Y')
+  end
+
+  def format_money(money)
+    return '' unless money
+
+    number_with_precision(money, precision: 0, delimiter: ',', separator: '.')
+  end
+
+  def admin_controller?
+    %w[stadium_groups stadia course_categories teachers receipt_categories].include? params[:controller]
   end
 end

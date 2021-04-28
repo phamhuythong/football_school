@@ -4,16 +4,18 @@ class StadiumGroupForm < BaseForm
   attribute :name
   attribute :info
 
+  attr_accessor :record
+
   validates :name, presence: true
 
   def self.build(params = {})
     instance = new
 
     if params[:id]
-      record = StadiumGroup.find(params[:id])
-      return nil if record.blank?
+      instance.record = StadiumGroup.find(params[:id])
+      return nil if instance.record.blank?
 
-      instance.restore_from_record(record)
+      instance.restore_from_record
     end
 
     instance.attributes = permitted_params(params) if params[:stadium_group_form].present?
@@ -32,9 +34,6 @@ class StadiumGroupForm < BaseForm
 
   def update
     if valid?
-      record = StadiumGroup.find(id)
-      return false if record.blank?
-
       record.update!(attributes_for_active_record)
       true
     else

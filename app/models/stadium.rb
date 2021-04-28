@@ -18,6 +18,9 @@ class Stadium < ApplicationRecord
 
   has_many :addresses, as: :addressable, inverse_of: :stadium
   has_many :courses, inverse_of: :stadium
+  has_many :teaching_management_stadia, inverse_of: :stadium
+  has_many :accounts, through: :teaching_management_stadia, class_name: 'Account'
+
 
   validates :name, presence: true
   validates :stadium_group_id, presence: true

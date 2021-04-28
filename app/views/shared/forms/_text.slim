@@ -2,8 +2,10 @@
 - class_name ||= ''
 - id ||= "#{f.object.class.to_s.downcase}_#{field}"
 - disabled ||= false
+- value ||= f.object&.send(field)
+
 .form-group
   = f.label field_name
-  = f.text_field field, class: "form-control #{class_name}", id: id, placeholder: field_name, disabled: disabled
+  = f.text_field field, value: value, class: "form-control #{class_name}", id: id, placeholder: field_name, disabled: disabled
   - f.object.errors.full_messages_for(field).each do |message|
     .invalid-feedback= message

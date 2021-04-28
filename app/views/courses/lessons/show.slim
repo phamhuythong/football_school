@@ -1,0 +1,22 @@
+.container-fluid
+  .row
+    .col-sm
+      .text-center
+        h2= "#{t('courses.hold_date')} #{format_date(@lesson.hold_date)}"
+
+  .row
+    .col-sm
+      .table-responsive-sm
+        table.table class=table_style
+          th scope='col' = t('common.student')
+          th.align-middle scope='col' = t('common.dob')
+          th.align-middle scope='col' = t('courses.attendance')
+          - @students.each do |obj|
+            tr
+              th= link_to obj.full_name, student_path(obj)
+              td.align-middle= format_date(obj.date_of_birth)
+              td.align-middle= check_box_tag :attendance, obj.id, @attendance_ids&.include?(obj.id), disabled: true
+
+  .row.mt-2
+    .col-sm
+      strong= link_to "< #{t('buttons.back')}", course_lessons_path(params[:course_id])

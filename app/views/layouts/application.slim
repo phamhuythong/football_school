@@ -9,20 +9,21 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
     - if logged_in?
-      .container-sm
+      .container-fluid
         .row
-          .col-sm
+          .col-12.col-lg
             = render 'layouts/navbar'
       button#back-to-top.btn.btn-outline-secondary.back-to-top role='button'
         i.fas.fa-chevron-up
 
     - if flash[:notice]
-      .container-sm
+      .container-fluid
         .row
-          .col-sm
+          .col-12.col-lg
             .alert.alert-success.alert-dismissible.fade.show.mt-2
               strong= flash[:notice]
               button.close{ aria-label='Close' data-dismiss='alert' type='button' }
                 span{ aria-hidden='true'} &times;
     = yield
     = javascript_packs_with_chunks_tag 'app'
+    / = javascript_packs_with_chunks_tag 'plugins/vanillaSelectBox'

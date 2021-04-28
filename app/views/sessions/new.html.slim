@@ -6,13 +6,16 @@
           = image_tag 'logo.jpg', alt: 'logo', class: 'login-logo'
         - if flash[:alert]
           .alert.alert-danger.alert-dismissible.fade.show
-            strong= t('.invalid_email_password')
+            strong= t('.invalid_acocunt_password')
             button.close{ aria-label='Close' data-dismiss='alert' type='button' }
               span{ aria-hidden='true'} &times;
         = form_with scope: :session, url: login_path, method: :post, local: true, class: 'login-form' do |f|
+          / .form-group
+          /   = f.label :email
+          /   = f.text_field :email, class: 'form-control', placeholder: t('.email'), required: true, type: 'email'
           .form-group
-            = f.label :email
-            = f.text_field :email, class: 'form-control', placeholder: t('.email'), required: true, type: 'email'
+            = f.label t('.account')
+            = f.text_field :account, class: 'form-control', placeholder: t('.email_username'), required: true
           .form-group
             = f.label t('.password')
             = f.text_field :password, class: 'form-control', placeholder: t('.password'), required: true, type: 'password'

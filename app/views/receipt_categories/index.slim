@@ -1,0 +1,14 @@
+= content_for :table_body do
+  thead
+    tr
+      th scope='col' = t('common.receipt_category')
+      th scope='col' = t('common.price')
+      th scope='col'
+  tbody
+    - @receipt_categories.each_with_index do |obj, index|
+      tr
+        td.align-middle= obj.name
+        td.align-middle= format_money(obj.price)
+        td= modification_buttons urls: { edit_url: edit_receipt_category_path(obj), delete_url: receipt_category_path(obj) }
+
+= render 'shared/index', header: t('.receipt_category_list'), new_url: new_receipt_category_path, data: @receipt_categories

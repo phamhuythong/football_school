@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 class StudentsController < ApplicationController
+  before_action :pundit_authorize
+  before_action :merge_current_user, only: [:new, :create, :edit, :update]
+
   def index
-    @students = Student.filter(params.slice(:course, :first_name)).page(params[:page]).per(PAGE)
+    @students = Student.filter(params.slice(:course,
+                                            :first_name)).with_attached_avatar.order(:id).page(params[:page]).per(PAGE).decorate
     @courses = Course.active.order(:id)
   end
 
@@ -48,5 +52,13 @@ class StudentsController < ApplicationController
   def redirect_after_save(params)
     back_url = params[:course_id] ? course_path(params[:course_id]) : students_path
     redirect_to back_url, notice: I18n.t('notices.save')
+  end
+
+  def pundit_authorize
+    authorize Student
+  end
+
+  def merge_current_user
+    params.merge!(current_user: current_user)
   end
 end

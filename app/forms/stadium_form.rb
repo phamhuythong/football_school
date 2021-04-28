@@ -14,10 +14,10 @@ class StadiumForm < BaseForm
     instance = new
 
     if params[:id]
-      record = Stadium.find(params[:id])
-      return nil if record.blank?
+      instance.record = Stadium.find(params[:id])
+      return nil if instance.record.blank?
 
-      instance.restore_from_record(record)
+      instance.restore_from_record
     end
 
     instance.attributes = permitted_params(params) if params[:stadium_form].present?
@@ -37,9 +37,6 @@ class StadiumForm < BaseForm
 
   def update
     if valid?
-      record = Stadium.find(id)
-      return false if record.blank?
-
       record.update!(attributes_for_active_record)
       true
     else

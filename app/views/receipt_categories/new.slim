@@ -1,0 +1,6 @@
+.container-fluid
+  .row
+    .col-sm
+      .text-center
+        h2= t('.title')
+  = render 'form', form: @form, url: receipt_categories_url, method: :post

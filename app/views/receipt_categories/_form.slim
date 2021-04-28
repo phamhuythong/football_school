@@ -1,0 +1,4 @@
+= form_with model: form, url: url, method: method, local: true, class: 'receipt-category-form' do |f|
+  = text form: f, field: :name, field_name: t('common.receipt_category')
+  = money form: f, field: :price, field_name: t('common.price')
+  = submit form: f, back_url: receipt_categories_path

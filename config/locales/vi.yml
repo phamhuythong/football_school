@@ -1,6 +1,7 @@
 ---
 vi:
   common:
+    admin: Admin
     home: Trang Chủ
     information: Thông Tin
     stadium_group: Cụm Sân
@@ -30,6 +31,26 @@ vi:
     start_date: Ngày Bắt Đầu
     end_date: Ngày Kết Thúc
     note: Ghi Chú
+    receipt_list: Danh Sách Biên Lai
+    receipt_category: Loại Biên Lai
+    receipt: Biên Lai
+    price: Giá Tiền
+    payer: Người Nộp
+    cashier: Thu Ngân
+    prepared_by: Người Lập Phiếu
+    receipt_no: Số Biên Lai
+    book_no: Quyển Số
+    receipt_date: Ngày Thu Tiền
+    amount: Số Tiền
+    paid: Đã Thu
+    remain: Còn Lại
+    reason: Lý Do
+    total_lessons: Tổng Số Buổi Học
+    attendance: Có Mặt
+    absence: Vắng Mặt
+    remind_course_fee: Nhắc Học Phí
+    avatar: Hình Đại Diện
+    email: Email
   buttons:
     logout: Đăng Xuất
     new: Thêm

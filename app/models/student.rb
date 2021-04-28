@@ -28,6 +28,7 @@ class Student < User
   has_many :student_courses, class_name: 'StudentCourse'
   has_many :courses, through: :student_courses, class_name: 'Course', foreign_key: :course_id
   has_many :lesson_absences, inverse_of: :student
+  has_many :student_receipts, inverse_of: :student
 
   # accepts_nested_attributes_for :student_courses, reject_if: :all_blank, allow_destroy: true
 

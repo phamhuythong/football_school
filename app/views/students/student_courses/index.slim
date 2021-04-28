@@ -1,4 +1,4 @@
-/ .container-sm.mt-3
+/ .container-fluid.mt-3
 /   .row
 /     .col-sm.text-center
 /       h2= t('students.course_list')
@@ -19,7 +19,7 @@
 /       .col-sm-3.align-middle= c.register_date
 /       .col-sm-3.align-middle= c.start_date
 /       .col-sm-3.align-middle
-/         = modification_buttons urls: { edit_url: edit_student_student_course_path(@student, c), delete_url: student_student_course_path(@student, c) }, enable_delete: true
+/         = modification_buttons urls: { edit_url: edit_student_student_course_path(@student, c), delete_url: student_student_course_path(@student, c) }
 /   .row.mt-2
 /     .col-sm
 /       strong= link_to "< #{t('buttons.back')}", student_path(@student)
@@ -28,20 +28,25 @@
   thead
     tr
       th scope='col' = t('common.course')
-      th scope='col' = t('students.register_date')
       th scope='col' = t('students.start_date')
+      th scope='col' = t('common.total_lessons')
+      th scope='col' = t('courses.attendance')
+      th scope='col' = t('courses.absence')
       th scope='col'
   tbody
     - @student_courses.each do |obj|
       tr
         th.align-middle= obj.course.name
-        td.align-middle= obj.register_date
         td.align-middle= obj.start_date
+        td.align-middle= obj.total_lessons
+        td.align-middle= obj.attendances
+        td.align-middle= obj.absences
         td.align-middle
-          = modification_buttons urls: { edit_url: edit_student_student_course_path(@student, obj), delete_url: student_student_course_path(@student, obj) }, enable_delete: true
+          - remind_course_fee_url = (obj.total_lessons - obj.attendances) < 2 ? '#' : ''
+          = modification_buttons urls: { edit_url: edit_student_student_course_path(@student, obj), delete_url: student_student_course_path(@student, obj), remind_course_fee_url: remind_course_fee_url }
 
-= render 'shared/index', header: t('students.course_list'), new_url: new_student_student_course_path(@student), paging: false
-.container-sm
+= render 'shared/index', header: @student.full_name, new_url: new_student_student_course_path(@student), paging: false
+.container-fluid
   .row
     .col-sm
       strong= link_to "< #{t('buttons.back')}", student_path(@student)

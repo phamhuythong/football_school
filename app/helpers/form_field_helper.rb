@@ -21,6 +21,22 @@ module FormFieldHelper
     render 'shared/forms/time', options.merge(f: form, field: field)
   end
 
+  def number(form:, field:, **options)
+    render 'shared/forms/number', options.merge(f: form, field: field)
+  end
+
+  def email(form:, field:, **options)
+    render 'shared/forms/email', options.merge(f: form, field: field)
+  end
+
+  def money(form:, field:, **options)
+    render 'shared/forms/money', options.merge(f: form, field: field)
+  end
+
+  def file(form:, field:, **options)
+    render 'shared/forms/file', options.merge(f: form, field: field)
+  end
+
   def collection_checkboxes(form:, field:, collection:, **options)
     render 'shared/forms/collection_checkboxes', options.merge(f: form, field: field, collection: collection)
   end

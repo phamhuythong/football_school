@@ -5,17 +5,8 @@ module SessionHelper
     session[:account_id] = account.id
   end
 
-  def log_out
-    session.delete(:account_id)
-    @current_user = nil
-  end
-
   def logged_in?
     current_user.present?
-  end
-
-  def current_user
-    @current_user ||= Account.find(session[:account_id]) if session[:account_id]
   end
 
   def redirect_back_or(default)
@@ -28,9 +19,9 @@ module SessionHelper
   end
 
   def require_login
-    unless current_user
-      store_location
-      redirect_to login_url
-    end
+    return if current_user
+
+    store_location
+    redirect_to login_url
   end
 end

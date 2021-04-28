@@ -8,7 +8,9 @@
     - @teachers.each_with_index do |obj, index|
       tr
         td.align-middle= obj.code
-        td.align-middle= obj.full_name
+        td.align-middle
+          = image_tag obj.user_avatar, alt: 'avatar', class: "#{image_avatar}"
+          = obj.full_name
         td= modification_buttons urls: { edit_url: edit_teacher_path(obj), delete_url: teacher_path(obj) }
 
 = render 'shared/index', header: t('.teacher_list'), new_url: new_teacher_path, data: @teachers

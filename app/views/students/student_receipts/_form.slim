@@ -1,0 +1,32 @@
+= form_with model: form, url: url, method: method, local: true, class: 'student-receipt-form' do |f|
+  = hidden form: f, field: :prepared_by, value: current_user&.id
+  .row
+    .col-xs-12.col-lg-4
+      = text form: f, field: :preparer, field_name: t('common.prepared_by'), value: current_user.username, disabled: true
+    .col-xs-12.col-lg-4
+      = date form: f, field: :receipt_date, field_name: t('common.receipt_date')
+    .col-xs-12.col-lg-4
+      = dropdown form: f, field: :course_id, collection: form.courses, value_method: :id, text_method: :name, field_name: t('common.course')
+  .row
+    .col-xs-12.col-lg-4
+      = text form: f, field: :book_no, field_name: t('common.book_no')
+    .col-xs-12.col-lg-4
+      = text form: f, field: :receipt_no, field_name: t('common.receipt_no')
+    .col-xs-12.col-lg-4
+      = dropdown form: f, field: :receipt_category_id, collection: form.receipt_categories, value_method: :id, text_method: :name, field_name: t('common.receipt_category')
+  .row
+    .col-xs-12.col-lg-4
+      = text form: f, field: :reason, field_name: t('common.reason')
+    .col-xs-12.col-lg-4
+      = text form: f, field: :payer, field_name: t('common.payer')
+    .col-xs-12.col-lg-4
+      = number form: f, field: :total_lessons, field_name: t('common.total_lessons')
+  .row
+    .col-xs-12.col-lg-4
+      = money form: f, field: :amount, field_name: t('common.amount')
+    .col-xs-12.col-lg-4
+      = money form: f, field: :paid, field_name: t('common.paid')
+    .col-xs-12.col-lg-4
+      = money form: f, field: :remain, field_name: t('common.remain')
+
+  = submit form: f, back_url: student_student_receipts_path(params[:student_id])

@@ -10,10 +10,10 @@ class CourseCategoryForm < BaseForm
     instance = new
 
     if params[:id]
-      record = CourseCategory.find(params[:id])
-      return nil if record.blank?
+      instance.record = CourseCategory.find(params[:id])
+      return nil if instance.record.blank?
 
-      instance.restore_from_record(record)
+      instance.restore_from_record
     end
 
     instance.attributes = permitted_params(params) if params[:course_category_form].present?
@@ -32,9 +32,6 @@ class CourseCategoryForm < BaseForm
 
   def update
     if valid?
-      record = CourseCategory.find(id)
-      return false if record.blank?
-
       record.update!(attributes_for_active_record)
       true
     else

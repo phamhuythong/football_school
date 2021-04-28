@@ -22,7 +22,10 @@
 # t.index ["account_id"], name: "index_users_on_account_id"
 
 class Teacher < User
+  resourcify
+
   include Scopeable
   # self.adapter = User.adapter
-  has_many :courses, class_name: 'Course', inverse_of: :teacher
+  has_many :teacher_courses, class_name: 'TeacherCourse', inverse_of: :teacher
+  has_many :courses, through: :teacher_courses, class_name: 'Course', foreign_key: :course_id
 end

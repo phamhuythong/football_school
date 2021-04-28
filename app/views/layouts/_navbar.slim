@@ -5,26 +5,44 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
     span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     ul.navbar-nav.mr-auto
-      li.nav-item*{class: (params[:controller] == 'stadium_groups' ? 'active' : '')}
-        = link_to stadium_groups_path, class: 'nav-link' do
-          = t('common.stadium_group')
-      li.nav-item*{class: (params[:controller] == 'stadia' ? 'active' : '')}
-        = link_to stadia_path, class: 'nav-link' do
-          = t('common.stadium')
-      li.nav-item*{class: (params[:controller] == 'course_categories' ? 'active' : '')}
-        = link_to course_categories_path, class: 'nav-link' do
-          = t('common.course_category')
+      - if current_user.admin?
+        li.nav-item.dropdown*{class: (admin_controller? ? 'active' : '')}
+          a#navbarDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+            = t('common.admin')
+          .dropdown-menu aria-labelledby="navbarDropdown"
+            = link_to stadium_groups_path, class: 'dropdown-item href' do
+              = t('common.stadium_group')
+            = link_to stadia_path, class: 'dropdown-item href' do
+              = t('common.stadium')
+            = link_to course_categories_path, class: 'dropdown-item href' do
+              = t('common.course_category')
+            = link_to teachers_path, class: 'dropdown-item href' do
+              = t('common.teacher')
+            = link_to receipt_categories_path, class: 'dropdown-item href' do
+              = t('common.receipt_category')
+            / .dropdown-divider
+
+      / li.nav-item*{class: (params[:controller] == 'stadium_groups' ? 'active' : '')}
+      /   = link_to stadium_groups_path, class: 'nav-link' do
+      /     = t('common.stadium_group')
+      / li.nav-item*{class: (params[:controller] == 'stadia' ? 'active' : '')}
+      /   = link_to stadia_path, class: 'nav-link' do
+      /     = t('common.stadium')
+      / li.nav-item*{class: (params[:controller] == 'course_categories' ? 'active' : '')}
+      /   = link_to course_categories_path, class: 'nav-link' do
+      /     = t('common.course_category')
+      / li.nav-item*{class: (params[:controller] == 'teachers' ? 'active' : '')}
+      /   = link_to teachers_path, class: 'nav-link' do
+      /     = t('common.teacher')
       li.nav-item*{class: (params[:controller] == 'courses' ? 'active' : '')}
         = link_to courses_path, class: 'nav-link' do
           = t('common.course')
-      li.nav-item*{class: (params[:controller] == 'teachers' ? 'active' : '')}
-        = link_to teachers_path, class: 'nav-link' do
-          = t('common.teacher')
-      li.nav-item*{class: (params[:controller] == 'students' ? 'active' : '')}
-        = link_to students_path, class: 'nav-link' do
-          = t('common.student')
+      - unless current_user.teacher?
+        li.nav-item*{class: (params[:controller] == 'students' ? 'active' : '')}
+          = link_to students_path, class: 'nav-link' do
+            = t('common.student')
     - if logged_in?
       .navbar-text
+        - loggin_name = current_user.users.present? ? current_user.users.first.first_name : 'account'
+        = "#{loggin_name} | "
         = link_to t('buttons.logout'), logout_path, method: :delete, class: ''
-
-

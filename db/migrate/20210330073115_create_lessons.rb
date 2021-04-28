@@ -5,6 +5,8 @@ class CreateLessons < ActiveRecord::Migration[6.0]
       t.date :hold_date
       t.time :start_time
       t.time :end_time
+      t.integer :attendances, limit: 2, default: 0
+      t.integer :absences, limit: 2, default: 0
       t.integer :lock_version, default: 0
       t.index :course_id
       t.index [:course_id, :hold_date], unique: true

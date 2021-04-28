@@ -16,24 +16,24 @@ class Students::StudentCourseForm < BaseForm
     instance = new
 
     if params[:id]
-      record = StudentCourse.find(params[:id])
-      return nil if record.blank?
+      instance.record = StudentCourse.find(params[:id])
+      return nil if instance.record.blank?
 
-      instance.restore_from_record(record)
+      instance.restore_from_record
     end
 
     instance.attributes = permitted_params(params) if params[:students_student_course_form].present?
     instance.args = params
-    instance.load_associations(record)
+    instance.load_associations
 
     instance
   end
 
-  def load_associations(record)
+  def load_associations
     if exist?
       self.course_name = record.course.name
     else
-      course_ids = Student.find(args[:student_id]).student_courses.map(&:course_id)
+      course_ids = Student.find(args[:student_id]).student_courses.active.map(&:course_id)
       self.courses = Course.active.where.not(id: course_ids).order(:id)
     end
   end
@@ -50,7 +50,6 @@ class Students::StudentCourseForm < BaseForm
   end
 
   def update!
-    record = StudentCourse.find(id)
     record.update!(attributes_for_active_record)
   end
 

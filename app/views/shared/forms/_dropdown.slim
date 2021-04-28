@@ -2,8 +2,10 @@
 - class_name ||= ''
 - id ||= "#{f.object.class.to_s.downcase}_#{field}"
 - opts ||= { include_blank: field_name }
+- disabled ||= false
+- multiple ||= false
 .form-group
   = f.label field_name
-  = f.collection_select field, collection, value_method, text_method, opts, { class: "form-control #{class_name}", id: id }
+  = f.collection_select field, collection, value_method, text_method, opts, { class: "form-control #{class_name}", id: id, disabled: disabled, multiple: multiple }
   - f.object.errors.full_messages_for(field).each do |message|
     .invalid-feedback= message

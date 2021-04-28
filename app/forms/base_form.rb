@@ -5,6 +5,7 @@ class BaseForm
   include ActiveModel::Attributes
 
   attribute :id
+  attr_accessor :record
 
   RANDOM_LIMIT = 999_999
   ZERO_RJUST = 6

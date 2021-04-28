@@ -20,3 +20,5 @@ vi:
         lesson_list: Thông Tin Điểm Danh
       new:
         title: Điểm Danh
+      edit:
+        title: Điểm Danh

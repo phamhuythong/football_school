@@ -23,14 +23,21 @@ class Course < ApplicationRecord
 
   belongs_to :course_category, inverse_of: :courses
   belongs_to :stadium, inverse_of: :courses
-  belongs_to :teacher, class_name: 'Teacher', inverse_of: :courses
 
   has_many :student_courses, class_name: 'StudentCourse', inverse_of: :course
   has_many :students, through: :student_courses, class_name: 'Student', foreign_key: :student_id
+  has_many :teacher_courses, class_name: 'TeacherCourse', inverse_of: :course
+  has_many :teachers, through: :teacher_courses, class_name: 'Teacher', foreign_key: :teacher_id
   has_many :lessons, inverse_of: :course
   has_many :lesson_absences, through: :lessons, class_name: 'LessonAbsence'
+  has_many :student_receipts, inverse_of: :course
 
-  scope :by_stadium, ->(stadium_id) { where(stadium_id: stadium_id) }
+  scope :by_stadium, ->(stadium_id) { active.where(stadium_id: stadium_id) }
+  scope :by_student, lambda { |student_id|
+                       active.joins(:student_courses).where(student_courses: { student_id: student_id, deleted: false })
+                     }
+  scope :by_teacher, ->(teacher_id) {active.joins(:teacher_courses).where(teacher_courses: {teacher_id: teacher_id, deleted: false})}
+  scope :by_stadiums, ->(stadium_ids) {active.where(stadium_id: stadium_ids)}
 
   validates :name, presence: true
   validates :course_category_id, presence: true

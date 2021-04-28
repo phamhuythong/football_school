@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CourseCategoriesController < ApplicationController
+  before_action :pundit_authorize
+
   def index
     @course_categories = CourseCategory.active.order(:id).page(params[:page]).per(PAGE)
   end
@@ -37,5 +39,9 @@ class CourseCategoriesController < ApplicationController
     @course_category = CourseCategory.active.find(params[:id])
     @course_category.update!(deleted: true)
     redirect_to course_categories_path, notice: I18n.t('notices.delete')
+  end
+
+  def pundit_authorize
+    authorize CourseCategory
   end
 end

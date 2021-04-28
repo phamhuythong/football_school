@@ -28,4 +28,8 @@ module TagClassHelper
   def table_style
     'table-hover'
   end
+
+  def image_avatar
+    'rounded-circle img-avatar mr-1'
+  end
 end

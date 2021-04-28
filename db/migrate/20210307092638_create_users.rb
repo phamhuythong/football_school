@@ -15,6 +15,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.integer :lock_version, default: 0
       t.boolean :deleted, default: false
       t.string :address
+      t.string :email
       t.string :mother_name
       t.string :mother_phone
       t.string :father_name

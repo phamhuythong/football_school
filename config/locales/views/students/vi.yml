@@ -6,7 +6,6 @@ vi:
     start_date: Ngày Nhập Học
     course_list: Danh Sách Lớp Học
     new_course: Thêm Lớp Học
-    receipt_list: Danh Sách Biên Lai
     index:
       student_list: Danh Sách Học Viên
     new:
@@ -18,3 +17,8 @@ vi:
         title: Thêm Thông Tin Lớp
       edit:
         title: Cập Nhật Thông Tin Lớp
+    student_receipts:
+      new:
+        title: Thêm Biên Lai
+      edit:
+        title: Cập Nhật Biên Lai

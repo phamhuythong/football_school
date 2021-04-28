@@ -2,9 +2,11 @@
   = dropdown form: f, field: :course_category_id, field_name: t('common.course_category'),
              collection: form.course_categories, value_method: :id, text_method: :name, class_name: 'select-form'
   = text form: f, field: :name, field_name: t('common.course')
-  = dropdown form: f, field: :teacher_id, field_name: t('common.teacher'),
-             collection: form.teachers, value_method: :id, text_method: :full_name, class_name: 'select-form'
+  = dropdown form: f, field: :teacher_ids, field_name: t('common.teacher'),
+             collection: form.teachers, value_method: :id, text_method: :full_name, class_name: 'select-form', multiple: true,
+             opts: {include_blank: false}
   = dropdown form: f, field: :stadium_id, field_name: t('common.stadium'),
              collection: form.stadia, value_method: :id, text_method: :name, class_name: 'select-form'
   = submit form: f, back_url: courses_path
 
+/ = javascript_packs_with_chunks_tag 'courses/form'

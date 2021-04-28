@@ -3,6 +3,9 @@ vi:
   sessions:
     new:
       email: Email
+      username: Username
+      account: Tài Khoản
+      email_username: Email hoặc Điện Thoại
       password: Mật Khẩu
       submit: Đăng Nhập
-      invalid_email_password: Email hoặc Mật Khẩu không đúng.
+      invalid_acocunt_password: Tài Khoản hoặc Mật Khẩu không đúng.

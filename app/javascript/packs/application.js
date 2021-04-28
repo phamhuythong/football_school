@@ -10,6 +10,7 @@ require('channels');
 require('bootstrap');
 require('@fortawesome/fontawesome-free');
 require('@nathanvda/cocoon');
+// require('./plugins/vanillaSelectBox');
 
 document.addEventListener("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()

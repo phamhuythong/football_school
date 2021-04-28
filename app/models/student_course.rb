@@ -3,13 +3,16 @@
 # table_name = student_courses
 # t.integer "student_id"
 # t.integer "course_id"
-# t.datetime "created_at", precision: 6, null: false
-# t.datetime "updated_at", precision: 6, null: false
 # t.boolean "deleted", default: false
 # t.date "start_date"
 # t.date "register_date"
 # t.date "end_date"
 # t.integer "lock_version", default: 0
+# t.integer "attendances", limit: 2, default: 0
+# t.integer "total_lessons", limit: 2, default: 0
+# t.integer "absences", limit: 2, default: 0
+# t.datetime "created_at", precision: 6, null: false
+# t.datetime "updated_at", precision: 6, null: false
 # t.index ["course_id"], name: "index_student_courses_on_course_id"
 # t.index ["student_id", "course_id", "start_date"], name: "student_course_start_unique", unique: true
 # t.index ["student_id"], name: "index_student_courses_on_student_id"

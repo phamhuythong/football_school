@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class TeacherForm < BaseForm
+  include ImageUploader[:image]
   attribute :code
   attribute :first_name
   attribute :last_name
@@ -10,6 +11,7 @@ class TeacherForm < BaseForm
   attribute :phone
   attribute :address
   attribute :lock_version
+  attribute :image_data
 
   validates :first_name, presence: true
 
@@ -17,10 +19,10 @@ class TeacherForm < BaseForm
     instance = new
 
     if params[:id]
-      record = Teacher.find(params[:id])
-      return nil if record.blank?
+      instance.record = Teacher.find(params[:id])
+      return nil if instance.record.blank?
 
-      instance.restore_from_record(record)
+      instance.restore_from_record
     end
 
     instance.attributes = permitted_params(params) if params[:teacher_form].present?
@@ -40,9 +42,6 @@ class TeacherForm < BaseForm
 
   def update
     if valid?
-      record = Teacher.find(id)
-      return false if record.blank?
-
       record.update!(attributes_for_active_record)
       true
     else
@@ -51,7 +50,7 @@ class TeacherForm < BaseForm
   end
 
   def self.permitted_params(params)
-    params.require(:teacher_form).permit :id, :first_name, :last_name, :middle_name, :gender, :date_of_birth,
+    params.require(:teacher_form).permit :id, :first_name, :last_name, :middle_name, :gender, :date_of_birth, :image,
                                          :phone, :address, :lock_version, Address.address_params, course_ids: []
   end
 end

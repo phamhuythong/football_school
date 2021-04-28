@@ -1,6 +1,6 @@
-.container-sm
+.container-fluid
   .row
     .col-sm
       .text-center
         h2= t('.title')
-  = render 'form', form: @form, url: course_url, method: :patch
+  = render 'form', form: @form, url: course_lesson_url, method: :patch

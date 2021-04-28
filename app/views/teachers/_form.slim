@@ -12,6 +12,9 @@
     .col-sm-4
       = collection_radios form: f, field: :gender, collection: ['Nam', 'Nữ', 'Khác'], value_method: :to_s, text_method: :to_s,
                     field_name: t('common.gender')
+    .col-xs-12.col-lg-4
+      .mt-sm-4
+        = file form: f, field: :image, field_name: t('common.avatar'), accept: '.jpg, .jpeg, .gif, .png, .webp'
   .row
     .col-sm-8
       = text form: f, field: :address, field_name: t('common.address')

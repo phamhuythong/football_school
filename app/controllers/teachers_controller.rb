@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class TeachersController < ApplicationController
+  before_action :pundit_authorize
+
   def index
-    @teachers = Teacher.active.order(:id).page(params[:page]).per(PAGE)
+    @teachers = Teacher.active.order(:id).page(params[:page]).per(PAGE).decorate
   end
 
   def show; end
@@ -38,5 +40,9 @@ class TeachersController < ApplicationController
     @teacher = Teacher.active.find(params[:id])
     @teacher.update!(deleted: true)
     redirect_to teachers_path, notice: I18n.t('notices.delete')
+  end
+
+  def pundit_authorize
+    authorize Teacher
   end
 end

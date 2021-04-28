@@ -1,0 +1,25 @@
+= content_for :table_body do
+  thead
+    tr
+      th scope='col' = t('common.receipt_no')
+      th scope='col' = t('common.receipt_date')
+      th scope='col' = t('common.course')
+      th scope='col' = t('common.paid')
+      th scope='col' = t('common.remain')
+      th scope='col'
+  tbody
+    - @student_receipts.each do |obj|
+      tr
+        th.align-middle= link_to obj.receipt_no, student_student_receipt_path(@student, obj)
+        td.align-middle= format_date(obj.receipt_date)
+        td.align-middle= obj&.course.name
+        td.align-middle= format_money(obj.paid)
+        td.align-middle= format_money(obj.remain)
+        td.align-middle
+          = modification_buttons urls: { edit_url: edit_student_student_receipt_path(@student, obj), delete_url: student_student_receipt_path(@student, obj) }
+
+= render 'shared/index', header: @student.full_name, new_url: new_student_student_receipt_path(@student), paging: false
+.container-fluid
+  .row
+    .col-sm
+      strong= link_to "< #{t('buttons.back')}", student_path(@student)

@@ -1,0 +1,34 @@
+.container-fluid.mt-2
+  .row
+    .col-sm
+      .text-sm-center
+        h2= "#{@student.full_name} - #{@student_receipt.receipt_no}"
+
+  .row.mt-2
+    .col-xs-12.col-lg-4
+      = "#{t('common.receipt_date')}: #{format_date(@student_receipt.receipt_date)}"
+    .col-xs-12.col-lg-4
+      = "#{t('common.course')}: #{@student_receipt&.course.name}"
+  .row
+    .col-xs-12.col-lg-4
+      = "#{t('common.book_no')}: #{@student_receipt.book_no}"
+    .col-xs-12.col-lg-4
+      = "#{t('common.receipt_no')}: #{@student_receipt.receipt_no}"
+    .col-xs-12.col-lg-4
+      = "#{t('common.receipt_category')}: #{@student_receipt&.receipt_category.name}"
+  .row
+    .col-xs-12.col-lg-4
+      = "#{t('common.amount')}: #{@student_receipt.amount}"
+    .col-xs-12.col-lg-4
+      = "#{t('common.paid')}: #{@student_receipt.paid}"
+    .col-xs-12.col-lg-4
+      = "#{t('common.remain')}: #{@student_receipt.remain}"
+  .row
+    .col-xs-12.col-lg-4
+      = "#{t('common.payer')}: #{@student_receipt.payer}"
+    .col-xs-12.col-lg-4
+      = "#{t('common.cashier')}: #{@student_receipt.cashier}"
+
+  .row.mt-2
+    .col-xs-12.col-lg-4
+      strong= link_to "< #{t('buttons.back')}", student_student_receipts_path(params[:student_id])

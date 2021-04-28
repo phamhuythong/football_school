@@ -1,0 +1,9 @@
+---
+vi:
+  receipt_categories:
+    index:
+      receipt_category_list: Danh Sách Loại Biên Lai
+    new:
+      title: Thêm Loại Biên Lai
+    edit:
+      title: Cập Nhật Loại Biên Lai
