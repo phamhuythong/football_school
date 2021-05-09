@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TeacherForm < BaseForm
-  include ImageUploader[:image]
+  include ImageUploader[:avatar]
   attribute :code
   attribute :first_name
   attribute :last_name
@@ -11,9 +11,10 @@ class TeacherForm < BaseForm
   attribute :phone
   attribute :address
   attribute :lock_version
-  attribute :image_data
+  attribute :avatar_data
 
   validates :first_name, presence: true
+  validate :uploaded_avatar
 
   def self.build(params = {})
     instance = new
@@ -50,7 +51,13 @@ class TeacherForm < BaseForm
   end
 
   def self.permitted_params(params)
-    params.require(:teacher_form).permit :id, :first_name, :last_name, :middle_name, :gender, :date_of_birth, :image,
+    params.require(:teacher_form).permit :id, :first_name, :last_name, :middle_name, :gender, :date_of_birth, :avatar,
                                          :phone, :address, :lock_version, Address.address_params, course_ids: []
+  end
+
+  def uploaded_avatar
+    self.avatar_attacher.errors.each do |error|
+      self.errors.add(:avatar, error)
+    end
   end
 end

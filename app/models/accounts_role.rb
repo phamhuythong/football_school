@@ -7,8 +7,8 @@
 # t.index ["account_id"], name: "index_accounts_roles_on_account_id"
 # t.index ["role_id"], name: "index_accounts_roles_on_role_id"
 
-class AccountRole < ApplicationRecord
+class AccountsRole < ApplicationRecord
   self.table_name = :accounts_roles
-  belongs_to :role, inverse_of: :account_roles
-  belongs_to :account, inverse_of: :account_roles
+  belongs_to :role, inverse_of: :accounts_roles
+  belongs_to :account, inverse_of: :accounts_roles
 end

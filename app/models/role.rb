@@ -3,8 +3,8 @@
 class Role < ApplicationRecord
   belongs_to :resource, polymorphic: true, optional: true
 
-  has_many :account_roles, class_name: 'AccountRole', inverse_of: :role
-  has_many :accounts, through: :account_roles
+  has_many :accounts_roles, class_name: 'AccountsRole', inverse_of: :role
+  has_many :accounts, through: :accounts_roles
 
   validates :resource_type,
             inclusion: { in: Rolify.resource_types },

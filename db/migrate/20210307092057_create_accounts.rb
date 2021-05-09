@@ -13,6 +13,8 @@ class CreateAccounts < ActiveRecord::Migration[6.0]
       t.string :reset_digest
       t.datetime :reset_sent_at
       t.string :status, default: 'active'
+      t.integer :lock_version, default: 0
+      t.text :avatar_data
       t.index :email, unique: true
       t.index :password_digest
       t.index :username, unique: true

@@ -18,7 +18,6 @@ class TeachersController < ApplicationController
     if @form.save
       redirect_to teachers_path, notice: I18n.t('notices.save')
     else
-      Rails.logger.info @form.errors.inspect
       render :new
     end
   end

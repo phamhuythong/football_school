@@ -6,7 +6,7 @@ class StudentsController < ApplicationController
 
   def index
     @students = Student.filter(params.slice(:course,
-                                            :first_name)).with_attached_avatar.order(:id).page(params[:page]).per(PAGE).decorate
+                                            :first_name)).order(:id).page(params[:page]).per(PAGE).decorate
     @courses = Course.active.order(:id)
   end
 

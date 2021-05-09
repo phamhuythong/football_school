@@ -1,0 +1,18 @@
+= content_for :table_body do
+  thead
+    tr
+      th scope='col' #
+      th scope='col' = t('common.email')
+      th scope='col' = t('common.username')
+      th scope='col' = t('common.role')
+      th scope='col'
+  tbody
+    - @accounts.each_with_index do |obj, index|
+      tr
+        td.align-middle = image_tag obj.account_avatar, alt: 'avatar', class: "#{image_avatar}"
+        td.align-middle = obj.email
+        td.align-middle = obj.username
+        td.align-middle = obj.account_roles
+        td= modification_buttons urls: { edit_url: edit_account_path(obj), delete_url: account_path(obj) }
+
+= render 'shared/index', header: t('.account_list'), new_url: new_account_path, data: @accounts

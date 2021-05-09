@@ -19,4 +19,13 @@ namespace :db do
       raise ActiveRecord::Rollback
     end
   end
+
+  task :create_account, [:email, :username, :password, :role] => :environment do |t, args|
+    email = args[:email]
+    username = args[:username]
+    password = args[:password]
+    role = args[:role]
+    account = Account.find_or_create_by(email: email, username: username, password: password)
+    account.add_role role
+  end
 end

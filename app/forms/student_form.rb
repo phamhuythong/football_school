@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StudentForm < BaseForm
-  include ImageUploader[:image]
+  include ImageUploader[:avatar]
   include Pundit
   attribute :code
   attribute :first_name
@@ -18,7 +18,7 @@ class StudentForm < BaseForm
   attribute :lock_version
   attribute :avatar
   attribute :email
-  attribute :image_data
+  attribute :avatar_data
 
   attr_accessor :courses, :course_ids, :args, :student_courses, :course_id, :register_date, :start_date
 
@@ -26,7 +26,7 @@ class StudentForm < BaseForm
   validates :course_id, presence: true, unless: :exist?
   validates :register_date, presence: true, unless: :exist?
   validates :start_date, presence: true, unless: :exist?
-  validate :uploaded_image
+  validate :uploaded_avatar
   # validate :valid_course_id, unless: :exist?
 
   def self.build(params = {})
@@ -50,7 +50,7 @@ class StudentForm < BaseForm
   def self.permitted_params(params)
     params.require(:student_form).permit :id, :first_name, :last_name, :middle_name, :gender, :date_of_birth,
                                          :phone, :address, :mother_name, :mother_phone, :father_name, :father_phone,
-                                         :course_id, :register_date, :start_date, :avatar, :email, :image,
+                                         :course_id, :register_date, :start_date, :avatar, :email, :avatar,
                                          :lock_version, Address.address_params, course_ids: []
   end
 
@@ -103,9 +103,9 @@ class StudentForm < BaseForm
     record.student_courses.create!(course_id: course_id, register_date: register_date, start_date: start_date)
   end
 
-  def uploaded_image
-    self.image_attacher.errors.each do |error|
-      self.errors.add(:image, error)
+  def uploaded_avatar
+    self.avatar_attacher.errors.each do |error|
+      self.errors.add(:avatar, error)
     end
   end
 

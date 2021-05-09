@@ -1,0 +1,9 @@
+---
+vi:
+  accounts:
+    index:
+      account_list: Danh Sách Tài Khoản
+    new:
+      title: Thêm Tài Khoản
+    edit:
+      title: Cập Nhật Tài Khoản

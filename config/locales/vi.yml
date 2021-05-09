@@ -1,6 +1,8 @@
 ---
 vi:
   common:
+    account: Tài Khoản
+    role: Role
     admin: Admin
     home: Trang Chủ
     information: Thông Tin
@@ -51,6 +53,7 @@ vi:
     remind_course_fee: Nhắc Học Phí
     avatar: Hình Đại Diện
     email: Email
+    username: Username
   buttons:
     logout: Đăng Xuất
     new: Thêm

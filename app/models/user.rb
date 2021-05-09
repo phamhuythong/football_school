@@ -23,11 +23,11 @@
 
 class User < ApplicationRecord
   include Scopeable
-  include ImageUploader[:image]
+  include ImageUploader[:avatar]
 
   belongs_to :account, optional: true, inverse_of: :users
 
-  has_one_attached :avatar
+  # has_one_attached :avatar
 
   has_many :addresses, as: :addressable
 

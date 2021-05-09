@@ -10,6 +10,8 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
           a#navbarDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
             = t('common.admin')
           .dropdown-menu aria-labelledby="navbarDropdown"
+            = link_to accounts_path, class: 'dropdown-item href' do
+              = t('common.account')
             = link_to stadium_groups_path, class: 'dropdown-item href' do
               = t('common.stadium_group')
             = link_to stadia_path, class: 'dropdown-item href' do

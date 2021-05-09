@@ -20,6 +20,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :mother_phone
       t.string :father_name
       t.string :father_phone
+      t.text :avatar_data
       t.index :account_id
 
       t.timestamps
