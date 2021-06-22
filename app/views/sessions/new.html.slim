@@ -1,23 +1,51 @@
-.container-fluid
-  .row
-    .col-sm
-      .login-page
-        .text-center
-          = image_tag 'logo.jpg', alt: 'logo', class: 'login-logo'
-        - if flash[:alert]
-          .alert.alert-danger.alert-dismissible.fade.show
-            strong= t('.invalid_acocunt_password')
-            button.close{ aria-label='Close' data-dismiss='alert' type='button' }
-              span{ aria-hidden='true'} &times;
-        = form_with scope: :session, url: login_path, method: :post, local: true, class: 'login-form' do |f|
-          / .form-group
-          /   = f.label :email
-          /   = f.text_field :email, class: 'form-control', placeholder: t('.email'), required: true, type: 'email'
-          .form-group
-            = f.label t('.account')
-            = f.text_field :account, class: 'form-control', placeholder: t('.email_username'), required: true
-          .form-group
-            = f.label t('.password')
-            = f.text_field :password, class: 'form-control', placeholder: t('.password'), required: true, type: 'password'
-          .form-group.text-center
-            = f.submit t('.submit'), class: "btn #{btn_submit}"
+.login-box
+  .card.card-outline.card-secondary
+    .card-header.text-center
+      a href='https://duongminhfc.com/'
+        = image_tag 'logo.jpg', alt: 'logo', class: 'img-login-logo'
+    .card-body.login-card-body
+      / p.login-box-msg Sign in to start your session
+      - if flash[:alert]
+        .alert.alert-danger.alert-dismissible
+          i.icon.fas.fa-ban
+          = t('.invalid_acocunt_password')
+          button.close aria-hidden="true" data-dismiss="alert" type="button" ×
+          / button.close aria-hidden="true" data-dismiss="alert" type="button" ×
+          / h5
+          /   i.icon.fas.fa-ban
+          /   = t('.invalid_acocunt_password')
+
+      = form_with scope: :session, url: login_path, method: :post, local: true, class: 'login-form' do |f|
+        .input-group.mb-3
+          = f.text_field :account, class: 'form-control', placeholder: t('.email_username'), required: true
+          .input-group-append
+            .input-group-text
+              span.fas.fa-envelope
+        .input-group.mb-3
+          = f.text_field :password, class: 'form-control', placeholder: t('.password'), required: true, type: 'password'
+          .input-group-append
+            .input-group-text
+              span.fas.fa-lock
+        .row
+          .col-12.text-center class="#{$breakpoint}-12"
+            = f.submit t('.submit'), class: "btn btn-secondary"
+          / .col-7
+          /   .icheck-primary.login-icheck
+          /     input#remember type="checkbox" class='checkbox-resize'
+          /     label for="remember" Ghi Nhớ
+          / .col-5
+          /   = f.submit t('.submit'), class: "btn btn-secondary btn-block"
+      / .social-auth-links.text-center.mb-3
+      /   p - Hoặc -
+      /   a.btn.btn-block.btn-primary href="javascript:;"
+      /     i.fab.fa-facebook.mr-2
+      /     | Đăng nhập bằng Facebook
+      /   a.btn.btn-block.btn-danger href="javascript:;"
+      /     i.fab.fa-google-plus.mr-2
+      /     | Đăng nhập bằng Google+
+      / p.mb-1
+      /   a href="javascript:;"  Quên mật khẩu
+      / p.mb-0
+      /   a.text-center href="javascript:;"  Đăng ký
+  / #extwaiokist c="29.97" d="1" e="" i="36" m="BMe=" q="34ba6b2a" s="06022121" style="display:none" u="4.715" v="{2c1b" vn="0vdo1" w="false"
+  /   #extwaigglbit c="29.97" d="1" e="" i="36" m="BMe=" q="34ba6b2a" s="06022121" style="display:none" u="4.715" v="{2c1b" w="false"

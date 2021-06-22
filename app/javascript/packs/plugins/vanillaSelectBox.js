@@ -1,11 +1,11 @@
 /*
 Copyright (C) Philippe Meyer 2019-2021
-Distributed under the MIT License 
+Distributed under the MIT License
 
 vanillaSelectBox : v0.58 : Bug fixes
 vanillaSelectBox : v0.57 : Bug fix (minWidth option not honored)
 vanillaSelectBox : v0.56 : The multiselect checkboxes are a little smaller, maxWidth option is now working + added minWidth option as well
-                           The button has now a style attribute to protect its appearance 
+                           The button has now a style attribute to protect its appearance
 vanillaSelectBox : v0.55 : All attributes from the original select options are copied to the selectBox element
 vanillaSelectBox : v0.54 : if all the options of the select are selected by the user then the check all checkbox is checked
 vanillaSelectBox : v0.53 : if all the options of the select are selected then the check all checkbox is checked
@@ -70,8 +70,8 @@ function vanillaSelectBox(domSelector, options) {
     this.disabledItems = [];
     this.ulminWidth = 140;
     this.ulminHeight = 25;
-    this.forbidenAttributes = ["class","selected","disabled","data-text","data-value","style"]; 
-    this.forbidenClasses= ["active","disabled"]; 
+    this.forbidenAttributes = ["class","selected","disabled","data-text","data-value","style"];
+    this.forbidenClasses= ["active","disabled"];
     this.userOptions = {
         maxWidth: 500,
         minWidth:-1,
@@ -79,7 +79,7 @@ function vanillaSelectBox(domSelector, options) {
         translations: { "all": "All", "items": "items","selectAll":"Select All","clearAll":"Clear All"},
         search: false,
         placeHolder: "",
-		stayOpen:false,
+    stayOpen:false,
         disableSelectAll: false,
     }
     if (options) {
@@ -107,7 +107,7 @@ function vanillaSelectBox(domSelector, options) {
         if (options.search != undefined) {
             this.search = options.search;
         }
-		if (options.stayOpen != undefined) {
+    if (options.stayOpen != undefined) {
             this.userOptions.stayOpen = options.stayOpen;
         }
         if (options.disableSelectAll != undefined) {
@@ -145,9 +145,9 @@ function vanillaSelectBox(domSelector, options) {
                 {"key":"padding","value":"6px 12px"}
                 ]
         }
-    
+
         return cssArrayToString(cssArray);
-    
+
         function cssArrayToString(cssList){
             let list = "";
             cssList.forEach(function(x){
@@ -198,11 +198,11 @@ function vanillaSelectBox(domSelector, options) {
         caret.style.right = "8px";
         caret.style.marginTop = "8px";
 
-		if(self.userOptions.stayOpen){
-			caret.style.display = "none";
-			this.title.style.paddingLeft = "20px";
-			this.title.style.fontStyle = "italic";
-			this.title.style.verticalAlign = "20%";
+    if(self.userOptions.stayOpen){
+      caret.style.display = "none";
+      this.title.style.paddingLeft = "20px";
+      this.title.style.fontStyle = "italic";
+      this.title.style.verticalAlign = "20%";
         }
 
         this.drop = document.createElement("div");
@@ -287,7 +287,7 @@ function vanillaSelectBox(domSelector, options) {
                     li.setAttribute(a.name, a.value);
                 });
             }
-            
+
             classes.forEach(function(x){
                 li.classList.add(x);
             });
@@ -429,17 +429,17 @@ function vanillaSelectBox(domSelector, options) {
             });
         }
 
-		if(self.userOptions.stayOpen){
+    if(self.userOptions.stayOpen){
             self.drop.style.visibility = "visible";
-			self.drop.style.boxShadow = "none";
-			self.drop.style.minHeight =  (this.userOptions.maxHeight+10) + "px";
-			self.drop.style.position = "relative";
-			self.drop.style.left = "0px";
-			self.drop.style.top = "0px";
-			self.button.style.border = "none";
-		}else{
-			this.main.addEventListener("click", function (e) {
-				if (self.isDisabled) return;
+      self.drop.style.boxShadow = "none";
+      self.drop.style.minHeight =  (this.userOptions.maxHeight+10) + "px";
+      self.drop.style.position = "relative";
+      self.drop.style.left = "0px";
+      self.drop.style.top = "0px";
+      self.button.style.border = "none";
+    }else{
+      this.main.addEventListener("click", function (e) {
+        if (self.isDisabled) return;
                     self.drop.style.left = self.left + "px";
                     self.drop.style.top = self.top + "px";
                     self.drop.style.visibility = "visible";
@@ -449,8 +449,8 @@ function vanillaSelectBox(domSelector, options) {
                     if(!self.userOptions.stayOpen ){
                         VSBoxCounter.closeAllButMe(self.instanceOffset);
                     }
-				});
-		}
+        });
+    }
         this.drop.addEventListener("click", function (e) {
             if (self.isDisabled) return;
 
@@ -661,7 +661,7 @@ vanillaSelectBox.prototype.setValue = function (values) {
                                     values.push(value);
                                 }
                             }
-                        } 
+                        }
                     }
                     });
                 } else if (values === "none") {
@@ -676,7 +676,7 @@ vanillaSelectBox.prototype.setValue = function (values) {
                                     }
                                 }
                             }
-                        } 
+                        }
                     });
                 }else {
                     values = values.split(",");
@@ -763,7 +763,7 @@ vanillaSelectBox.prototype.privateSendChange = function () {
     this.root.dispatchEvent(event);
 }
 
-	vanillaSelectBox.prototype.empty = function () {
+  vanillaSelectBox.prototype.empty = function () {
         Array.prototype.slice.call(this.listElements).forEach(function (x) {
             x.classList.remove("active");
         });
@@ -790,7 +790,7 @@ vanillaSelectBox.prototype.privateSendChange = function () {
         let already = document.getElementById("btn-group-" + this.domSelector);
         if (already) {
             button = already.querySelector("button")
-			if(button) button.classList.add("disabled");
+      if(button) button.classList.add("disabled");
             this.isDisabled = true;
         }
     }

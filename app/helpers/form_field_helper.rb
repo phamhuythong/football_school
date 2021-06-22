@@ -9,8 +9,16 @@ module FormFieldHelper
     render 'shared/forms/text', options.merge(f: form, field: field)
   end
 
+  def password(form:, field:, **options)
+    render 'shared/forms/password', options.merge(f: form, field: field)
+  end
+
   def dropdown(form:, field:, collection:, **options)
     render 'shared/forms/dropdown', options.merge(f: form, field: field, collection: collection)
+  end
+
+  def dropdown_multiple(form:, field:, collection:, **options)
+    render 'shared/forms/dropdown_multiple', options.merge(f: form, field: field, collection: collection)
   end
 
   def date(form:, field:, **options)
@@ -49,8 +57,8 @@ module FormFieldHelper
     render 'shared/forms/submit', options.merge(f: form, back_url: back_url)
   end
 
-  def modification_buttons(urls:, **options)
-    render 'shared/modification_buttons', options.merge(urls)
+  def modification_buttons(urls:, obj:, **options)
+    render 'shared/modification_buttons', options.merge(urls, obj: obj)
   end
 
   def index_header(header:, new_url:, **options)

@@ -14,8 +14,16 @@ class BaseForm
     assign_attributes(record.attributes.slice(*attribute_names))
   end
 
-  def attributes_for_active_record
+  def attributes_for_record
     attributes.each_with_object({}) do |(key, _attr), hash|
+      raise(NotImplementedError, "must implement #{self.class}##{key}") unless respond_to?(key)
+
+      hash[key] = public_send(key)
+    end
+  end
+
+  def attributes_for_nested_record(nested_attrs)
+    nested_attrs.each_with_object({}) do |(key, _attr), hash|
       raise(NotImplementedError, "must implement #{self.class}##{key}") unless respond_to?(key)
 
       hash[key] = public_send(key)
@@ -36,5 +44,21 @@ class BaseForm
 
   def exist?
     id.present?
+  end
+
+  def new_record?
+    id.blank?
+  end
+
+  def validate_uniqueness(model, field)
+    if exist?
+      unless send(field) == record.send(field)
+        m = model.constantize.find_by("#{field}": send(field))
+        errors.add(:"#{field}", 'đã tồn tại') if m
+      end
+    else
+      m = model.constantize.find_by("#{field}": send(field))
+      errors.add(:"#{field}", 'đã tồn tại') if m
+    end
   end
 end

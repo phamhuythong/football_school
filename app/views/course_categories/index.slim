@@ -9,6 +9,6 @@
       tr
         td.align-middle= obj.name
         td.align-middle= obj.info
-        td= modification_buttons urls: { edit_url: edit_course_category_path(obj), delete_url: course_category_path(obj) }
+        td= modification_buttons obj: obj, urls: { edit_url: edit_course_category_path(obj), delete_url: course_category_path(obj) }
 
 = render 'shared/index', header: t('.course_category_list'), new_url: new_course_category_path, data: @course_categories

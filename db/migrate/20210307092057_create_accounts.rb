@@ -3,7 +3,7 @@
 class CreateAccounts < ActiveRecord::Migration[6.0]
   def change
     create_table :accounts do |t|
-      t.string :email, null: false, unique: true
+      t.string :email, unique: true
       t.string :username, unique: true
       t.string :password_digest
       t.string :remember_digest
@@ -15,9 +15,9 @@ class CreateAccounts < ActiveRecord::Migration[6.0]
       t.string :status, default: 'active'
       t.integer :lock_version, default: 0
       t.text :avatar_data
-      t.index :email, unique: true
+      t.index :email
+      t.index :username
       t.index :password_digest
-      t.index :username, unique: true
 
       t.timestamps
     end

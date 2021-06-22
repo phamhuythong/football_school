@@ -1,21 +1,63 @@
 - paging = true if local_assigns[:paging].nil?
-.container-fluid.mt-2
-  .row
-    .col-sm
-      .text-sm-center
-        h2= header
-      .row
-        .col-sm-1.d-flex.align-middle
-          = link_to t('buttons.new'), new_url, class: "btn #{btn_new}"
-        = content_for :filter_object
-        = content_for :search_object
 
-  .row.mt-2
-    .col-sm
-      .table-responsive-sm
-        table.table class=table_style
-          = content_for :table_body
-  - if paging
-    .row
-      .col-sm.d-flex.justify-content-end
-        = paginate data
+.row
+  .col-12 class="#{$breakpoint}-12"
+    .card
+      .card-header
+        / h3.card-title= header
+        .text-center
+          h2= header
+        .row
+          - Rails.logger.info controller_name.classify.constantize
+          - if policy(controller_name.classify.constantize.new).new?
+            .col-12.d-flex.align-middle class="#{$breakpoint}-1"
+              = link_to t('buttons.new'), new_url, class: "btn #{btn_new}"
+          = content_for :filter_object
+          = content_for :search_object
+        / .card-tools
+        /   ul.pagination.pagination-sm.float-right
+        /     li.page-item
+        /       a.page-link href="#"  «
+        /     li.page-item
+        /       a.page-link href="#"  1
+        /     li.page-item
+        /       a.page-link href="#"  2
+        /     li.page-item
+        /       a.page-link href="#"  3
+        /     li.page-item
+        /       a.page-link href="#"  »
+      /! /.card-header
+      .card-body.p-0
+        .dataTables_wrapper.dt-bootstrap4
+          .row
+            .col-12 class="#{$breakpoint}-12"
+              .table-responsive
+                table.table class=table_style
+                  = content_for :table_body
+      - if paging
+        .card-footer
+          .row
+            .col-12.d-flex.justify-content-end class="#{$breakpoint}-12"
+              = paginate data
+              / .col-xs-12 class="#{$breakpoint}-5"
+              /   #example2_info.dataTables_info aria-live="polite" role="status"  Showing 1 to 10 of 57 entries
+              / .col-xs-12 class="#{$breakpoint}-7"
+              /   #example2_paginate.dataTables_paginate.paging_simple_numbers
+              /     = paginate data
+                  / ul.pagination
+                  /   li#example2_previous.paginate_button.page-item.previous.disabled
+                  /     a.page-link aria-controls="example2" data-dt-idx="0" href="#" tabindex="0"  Previous
+                  /   li.paginate_button.page-item.active
+                  /     a.page-link aria-controls="example2" data-dt-idx="1" href="#" tabindex="0"  1
+                  /   li.paginate_button.page-item
+                  /     a.page-link aria-controls="example2" data-dt-idx="2" href="#" tabindex="0"  2
+                  /   li.paginate_button.page-item
+                  /     a.page-link aria-controls="example2" data-dt-idx="3" href="#" tabindex="0"  3
+                  /   li.paginate_button.page-item
+                  /     a.page-link aria-controls="example2" data-dt-idx="4" href="#" tabindex="0"  4
+                  /   li.paginate_button.page-item
+                  /     a.page-link aria-controls="example2" data-dt-idx="5" href="#" tabindex="0"  5
+                  /   li.paginate_button.page-item
+                  /     a.page-link aria-controls="example2" data-dt-idx="6" href="#" tabindex="0"  6
+                  /   li#example2_next.paginate_button.page-item.next
+                  /     a.page-link aria-controls="example2" data-dt-idx="7" href="#" tabindex="0"  Next

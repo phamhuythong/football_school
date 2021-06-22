@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Students::StudentReceiptForm < BaseForm
+  include ActionView::Helpers::NumberHelper
   attribute :receipt_date
   attribute :receipt_no
   attribute :book_no
@@ -22,7 +23,7 @@ class Students::StudentReceiptForm < BaseForm
   validates :receipt_date, presence: true
   validates :receipt_no, presence: true
   validates :course_id, presence: true
-  validates :receipt_category_id, presence: true
+  # validates :receipt_category_id, presence: true
   validates :reason, presence: true
   validates :amount, presence: true
   validates :paid, presence: true
@@ -65,11 +66,12 @@ class Students::StudentReceiptForm < BaseForm
 
   def load_collection
     self.courses = Course.by_student(student_id)
-    self.receipt_categories = ReceiptCategory.active
+    load_receipt_category
   end
 
   def persist!
     ActiveRecord::Base.transaction do
+      convert_money
       self.record = create! unless exist?
       update! if exist?
       update_course!
@@ -77,11 +79,11 @@ class Students::StudentReceiptForm < BaseForm
   end
 
   def create!
-    Student.find(student_id).student_receipts.create!(attributes_for_active_record)
+    Student.find(student_id).student_receipts.create!(attributes_for_record)
   end
 
   def update!
-    record.update!(attributes_for_active_record)
+    record.update!(attributes_for_record)
   end
 
   def update_course!
@@ -90,5 +92,22 @@ class Students::StudentReceiptForm < BaseForm
 
     student_course_total_lessons = StudentReceipt.by_student_course(student_id, course_id).sum(:total_lessons)
     student_course.update!(total_lessons: student_course_total_lessons)
+  end
+
+  def load_receipt_category
+    categories = []
+    ReceiptCategory.active.each do |rc|
+      category = []
+      category.push(rc.id)
+      category.push("#{rc.name} - #{number_with_precision(rc.price, precision: 0, delimiter: ',', separator: '.')}")
+      categories.push(category)
+    end
+    self.receipt_categories = categories
+  end
+
+  def convert_money
+    self.amount = amount.to_s.gsub(/[$,]/, '').to_f
+    self.paid = paid.to_s.gsub(/[$,]/, '').to_f
+    self.remain = remain.to_s.gsub(/[$,]/, '').to_f
   end
 end

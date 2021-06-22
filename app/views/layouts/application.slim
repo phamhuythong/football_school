@@ -1,29 +1,25 @@
 doctype html
 html
   head
-    title
-      | FootballSchool
+    meta content=('text/html; charset=UTF-8') http-equiv='Content-Type'
+    title Dương Minh
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body
-    - if logged_in?
-      .container-fluid
-        .row
-          .col-12.col-lg
-            = render 'layouts/navbar'
-      button#back-to-top.btn.btn-outline-secondary.back-to-top role='button'
-        i.fas.fa-chevron-up
-
-    - if flash[:notice]
-      .container-fluid
-        .row
-          .col-12.col-lg
-            .alert.alert-success.alert-dismissible.fade.show.mt-2
-              strong= flash[:notice]
-              button.close{ aria-label='Close' data-dismiss='alert' type='button' }
-                span{ aria-hidden='true'} &times;
-    = yield
+  body.sidebar-mini.sidebar-closed.sidebar-collapse
+    .wrapper
+      = render 'layouts/base/nav'
+      = render 'layouts/base/main_sidebar'
+      = render 'layouts/base/content_wrapper'
+      = render 'layouts/base/footer'
+      = render 'layouts/base/control_sidebar'
     = javascript_packs_with_chunks_tag 'app'
-    / = javascript_packs_with_chunks_tag 'plugins/vanillaSelectBox'
+
+    / - if logged_in?
+    /   .container-fluid
+    /     .row
+    /       .col-12 class="#{$breakpoint}-12"
+    /         = render 'layouts/navbar'
+    /   button#back-to-top.btn.btn-outline-secondary.back-to-top role='button'
+    /     i.fas.fa-chevron-up

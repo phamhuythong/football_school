@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :show_fobbiden
 
-  PAGE = 10
+  PAGE = 5
 
   # before_action :set_locale
   helper_method :current_user
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= Account.find(session[:account_id]) if session[:account_id]
+    @current_user ||= Account.find(session[:account_id]).decorate if session[:account_id]
   end
 
   def log_out

@@ -19,9 +19,10 @@ class Stadium < ApplicationRecord
   has_many :addresses, as: :addressable, inverse_of: :stadium
   has_many :courses, inverse_of: :stadium
   has_many :teaching_management_stadia, inverse_of: :stadium
-  has_many :accounts, through: :teaching_management_stadia, class_name: 'Account'
-
+  has_many :teaching_managements, through: :teaching_management_stadia, class_name: 'TeachingMangement'
 
   validates :name, presence: true
   validates :stadium_group_id, presence: true
+
+  scope :by_stadiums, ->(stadium_ids) { active.where(id: stadium_ids) }
 end

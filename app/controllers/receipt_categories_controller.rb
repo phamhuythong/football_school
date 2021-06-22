@@ -28,7 +28,7 @@ class ReceiptCategoriesController < ApplicationController
 
   def update
     @form = ReceiptCategoryForm.build(params)
-    if @form.update
+    if @form.save
       redirect_to receipt_categories_path, notice: I18n.t('notices.save')
     else
       render :edit

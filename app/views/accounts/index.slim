@@ -1,7 +1,11 @@
+= content_for :search_object do
+  .col-12.d-flex.align-middle class="#{$breakpoint}-3"
+    = render partial: 'shared/index_search_form', locals: { url: accounts_path, field: :email_username, field_name: t('common.email_username'),
+                                          value: params[:email_username] }
+
 = content_for :table_body do
   thead
     tr
-      th scope='col' #
       th scope='col' = t('common.email')
       th scope='col' = t('common.username')
       th scope='col' = t('common.role')
@@ -9,10 +13,12 @@
   tbody
     - @accounts.each_with_index do |obj, index|
       tr
-        td.align-middle = image_tag obj.account_avatar, alt: 'avatar', class: "#{image_avatar}"
-        td.align-middle = obj.email
+        td.align-middle
+          = image_tag obj.account_avatar, alt: 'avatar', class: "#{image_avatar}"
+          = " #{obj.email}"
         td.align-middle = obj.username
         td.align-middle = obj.account_roles
-        td= modification_buttons urls: { edit_url: edit_account_path(obj), delete_url: account_path(obj) }
+        - assign_stadium_url = policy(obj).assign_stadium? ? assign_stadium_account_path(obj) : ''
+        td= modification_buttons obj: obj, urls: { edit_url: edit_account_path(obj), delete_url: account_path(obj) , assign_stadium_url: assign_stadium_url}
 
 = render 'shared/index', header: t('.account_list'), new_url: new_account_path, data: @accounts

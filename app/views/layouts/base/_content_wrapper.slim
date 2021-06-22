@@ -1,0 +1,16 @@
+.content-wrapper
+  section.content-header
+  /   .container-fluid
+  /     .row.mb-2
+  /       .col-12 class="#{$breakpoint}-6"
+  /         h1.m-0.text-dark Starter Page
+  /       .col-12 class="#{$breakpoint}-6"
+  /         ol.breadcrumb.float-sm-right
+  /           li.breadcrumb-item
+  /             a href="#"  Home
+  /           li.breadcrumb-item.active Starter Page
+  section.content.container-fluid
+    .container-fluid
+      - if flash[:notice]
+        = render 'layouts/base/flash_notice', flash: flash[:notice]
+      = yield

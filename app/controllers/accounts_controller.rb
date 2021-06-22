@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class AccountsController < ApplicationController
-  before_action :pundit_authorize
+  before_action :pundit_authorize, except: %i[assign_stadium process_assign_stadium]
 
   def index
-    @accounts = Account.active.order(:id).page(params[:page]).per(PAGE).decorate
+    @accounts = Account.filter(params.slice(:email_username)).order(:id).page(params[:page]).per(PAGE).decorate
   end
 
   def show; end
@@ -28,7 +28,7 @@ class AccountsController < ApplicationController
 
   def update
     @form = AccountForm.build(params)
-    if @form.update
+    if @form.save
       redirect_to accounts_path, notice: I18n.t('notices.save')
     else
       render :edit
@@ -37,8 +37,26 @@ class AccountsController < ApplicationController
 
   def destroy
     @account = Account.active.find(params[:id])
-    @account.update!(deleted: true)
+    @account.user&.delete
+    @account.delete
     redirect_to accounts_path, notice: I18n.t('notices.delete')
+  end
+
+  def assign_stadium
+    @account = Account.active.find(params[:id])
+    authorize @account
+    @form = Accounts::StadiumForm.build(params)
+  end
+
+  def process_assign_stadium
+    @account = Account.active.find(params[:id])
+    authorize @account
+    @form = Accounts::StadiumForm.build(params)
+    if @form.save
+      redirect_to accounts_path, notice: I18n.t('notices.save')
+    else
+      render :assign_stadium
+    end
   end
 
   def pundit_authorize

@@ -22,25 +22,23 @@ class ReceiptCategoryForm < BaseForm
     instance
   end
 
-  def save
-    if valid?
-      ReceiptCategory.create!(attributes_for_active_record)
-      true
-    else
-      false
-    end
-  end
-
-  def update
-    if valid?
-      record.update!(attributes_for_active_record)
-      true
-    else
-      false
-    end
-  end
-
   def self.permitted_params(params)
     params.require(:receipt_category_form).permit :id, :name, :price
+  end
+
+  def persist!
+    ActiveRecord::Base.transaction do
+      self.price = price.to_s.gsub(/[$,]/, '').to_f
+      self.record = create! unless exist?
+      update! if exist?
+    end
+  end
+
+  def create!
+    ReceiptCategory.create!(attributes_for_record)
+  end
+
+  def update!
+    record.update!(attributes_for_record)
   end
 end

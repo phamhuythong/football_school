@@ -11,6 +11,6 @@
         td.align-middle= obj.name
         td.align-middle= obj.stadium_group.name
         td.align-middle= obj.address
-        td= modification_buttons urls: { edit_url: edit_stadium_path(obj), delete_url: stadium_path(obj) }
+        td= modification_buttons obj: obj, urls: { edit_url: edit_stadium_path(obj), delete_url: stadium_path(obj) }
 
 = render 'shared/index', header: t('.stadium_list'), new_url: new_stadium_path, data: @stadia

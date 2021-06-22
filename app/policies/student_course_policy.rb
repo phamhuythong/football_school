@@ -2,26 +2,32 @@
 
 class StudentCoursePolicy < ApplicationPolicy
   def index?
-    true
+    account.admin? || account.teaching_management?
   end
 
   def show?
-    create?
-  end
-
-  def new?
-    create?
+    student_course_policy
   end
 
   def create?
-    true
+    account.admin? || account.teaching_management?
   end
 
   def update?
-    create?
+    student_course_policy
   end
 
   def destroy?
-    create?
+    student_course_policy
+  end
+
+  def student_course_policy
+    return true if account.admin?
+
+    if account.teaching_management?
+      account.teaching_management.teaching_management_stadia.map(&:stadium_id).include? record.course.stadium_id
+    else
+      false
+    end
   end
 end

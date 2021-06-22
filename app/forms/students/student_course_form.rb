@@ -34,7 +34,7 @@ class Students::StudentCourseForm < BaseForm
       self.course_name = record.course.name
     else
       course_ids = Student.find(args[:student_id]).student_courses.active.map(&:course_id)
-      self.courses = Course.active.where.not(id: course_ids).order(:id)
+      self.courses = CoursePolicy::Scope.new(args[:current_user], Course).resolve.where.not(id: course_ids).order(:id)
     end
   end
 
@@ -46,11 +46,11 @@ class Students::StudentCourseForm < BaseForm
   end
 
   def create!
-    Student.find(args[:student_id]).student_courses.create!(attributes_for_active_record)
+    Student.find(args[:student_id]).student_courses.create!(attributes_for_record)
   end
 
   def update!
-    record.update!(attributes_for_active_record)
+    record.update!(attributes_for_record)
   end
 
   def self.permitted_params(params)

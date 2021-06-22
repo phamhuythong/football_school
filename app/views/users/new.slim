@@ -1,6 +1,6 @@
 .container-fluid
   .row
-    .col-sm
+    .col-12 class="#{$breakpoint}-12"
       .text-center
         h2= t('.title')
   = render 'form', form: @form, url: users_url, method: 'POST'

@@ -36,8 +36,10 @@ class Course < ApplicationRecord
   scope :by_student, lambda { |student_id|
                        active.joins(:student_courses).where(student_courses: { student_id: student_id, deleted: false })
                      }
-  scope :by_teacher, ->(teacher_id) {active.joins(:teacher_courses).where(teacher_courses: {teacher_id: teacher_id, deleted: false})}
-  scope :by_stadiums, ->(stadium_ids) {active.where(stadium_id: stadium_ids)}
+  scope :by_teacher, lambda { |teacher_id|
+                       active.joins(:teacher_courses).where(teacher_courses: { teacher_id: teacher_id, deleted: false })
+                     }
+  scope :by_stadiums, ->(stadium_ids) { active.where(stadium_id: stadium_ids) }
 
   validates :name, presence: true
   validates :course_category_id, presence: true

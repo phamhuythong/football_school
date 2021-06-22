@@ -8,7 +8,12 @@ Rails.application.routes.draw do
     get '(page/:page)', action: :index, on: :collection, as: ''
   end
 
-  resources :accounts, concerns: :paginatable
+  resources :accounts, concerns: :paginatable do
+    member do
+      get :assign_stadium
+      post :process_assign_stadium
+    end
+  end
   resources :stadium_groups, concerns: :paginatable
   resources :stadia, concerns: :paginatable
   resources :course_categories, concerns: :paginatable
@@ -27,7 +32,7 @@ Rails.application.routes.draw do
   resources :teachers, concerns: :paginatable
   resources :receipt_categories, concerns: :paginatable
 
-  root to: 'homes#index'
+  root to: 'courses#index'
 
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'

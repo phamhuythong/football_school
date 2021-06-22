@@ -1,26 +1,29 @@
 = form_with model: form, url: url, method: method, local: true, class: 'lesson-form' do |f|
-  .row
-    .col-sm-4
-      = date form: f, field: :hold_date, field_name: t('courses.hold_date')
-    / .col-sm-4
-    /   = time form: f, field: :start_time, field_name: t('common.start_time')
-    / .col-sm-4
-    /   = time form: f, field: :end_time, field_name: t('common.end_time')
-  .row
-    .col-sm
-      .table-responsive-sm
-        table.table class=table_style
-          th scope='col' = t('common.student')
-          th.align-middle scope='col' = t('common.dob')
-          th.align-middle scope='col' = t('courses.attendance')
-          / th.align-middle scope='col' = t('common.note')
-          - form.students.each do |obj|
-            tr
-              th.align-middle
-                = link_to student_path(obj) do
-                  = image_tag obj.user_avatar, alt: 'avatar', class: "#{image_avatar}"
-                  = obj.full_name
-              td.align-middle= format_date(obj.date_of_birth)
-              td.align-middle= f.check_box :attendance_ids, { multiple: true, checked: form.attendance_ids&.include?(obj.id) }, obj.id, ''
-              / td.align-middle= f.text_field :notes, name: "courses_lesson_form[notes][#{obj.id}][note]", value: form&.notes&.dig("#{obj.id}", 'note'), class: 'form-control'
-  = submit form: f, back_url: course_lessons_path(params[:course_id])
+  .card-body
+    .row
+      .col-12 class="#{$breakpoint}-4"
+        = date form: f, field: :hold_date, field_name: t('courses.hold_date')
+      / .col-12 class="#{$breakpoint}-4"
+      /   = time form: f, field: :start_time, field_name: t('common.start_time')
+      / .col-12 class="#{$breakpoint}-4"
+      /   = time form: f, field: :end_time, field_name: t('common.end_time')
+    .row
+      .col-12 class="#{$breakpoint}-12"
+        .table-responsive
+          table.table class=table_style
+            th scope='col' = t('common.student')
+            th.align-middle scope='col' = t('common.dob')
+            th.align-middle scope='col' = t('courses.attendance')
+            / th.align-middle scope='col' = t('common.note')
+            - form.students.each do |obj|
+              tr
+                th.align-middle
+                  = link_to student_path(obj), class: 'a-secondary' do
+                    = image_tag obj.user_avatar, alt: 'avatar', class: "#{image_avatar}"
+                    = " #{obj.full_name}"
+                td.align-middle= format_date(obj.date_of_birth)
+                td.align-middle
+                  = f.check_box :attendance_ids, { multiple: true, checked: form.attendance_ids&.include?(obj.id), class: 'checkbox-resize' }, obj.id, ''
+                / td.align-middle= f.text_field :notes, name: "courses_lesson_form[notes][#{obj.id}][note]", value: form&.notes&.dig("#{obj.id}", 'note'), class: 'form-control'
+  .card-footer
+    = submit form: f, back_url: course_lessons_path(params[:course_id])

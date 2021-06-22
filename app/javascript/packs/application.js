@@ -7,15 +7,6 @@ require('@rails/ujs').start();
 require('turbolinks').start();
 require('@rails/activestorage').start();
 require('channels');
-require('bootstrap');
-require('@fortawesome/fontawesome-free');
-require('@nathanvda/cocoon');
-// require('./plugins/vanillaSelectBox');
-
-document.addEventListener("turbolinks:load", () => {
-  $('[data-toggle="tooltip"]').tooltip()
-  $('[data-toggle="popover"]').popover()
-})
 
 // Uncomment to copy all static images under ../images to the output folder and
 // reference them with the image_pack_tag helper in views
@@ -24,3 +15,24 @@ document.addEventListener("turbolinks:load", () => {
 
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+// require('@nathanvda/cocoon');
+// require('./plugins/vanillaSelectBox');
+
+var jQuery = require('jquery');
+
+global.$ = global.jQuery = jQuery;
+window.$ = window.jQuery = jQuery;
+
+import 'bootstrap';
+
+import '../stylesheets/application';
+import "select2/dist/js/select2";
+require('admin-lte');
+import "@fortawesome/fontawesome-free/js/all";
+
+document.addEventListener("turbolinks:load", () => {
+  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="popover"]').popover()
+  $('.select2').select2();
+});

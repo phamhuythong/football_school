@@ -1,0 +1,9 @@
+- field_name ||= field
+- class_name ||= ''
+- id ||= "#{f.object.class.to_s.downcase}_#{field}"
+- disabled ||= false
+.form-group
+  = f.label field_name
+  = f.text_field field, class: "form-control js-date-picker #{class_name}", id: id, placeholder: field_name, disabled: disabled
+  - f.object.errors.full_messages_for(field).each do |message|
+    .invalid-feedback= message

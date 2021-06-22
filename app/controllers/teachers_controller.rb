@@ -4,7 +4,7 @@ class TeachersController < ApplicationController
   before_action :pundit_authorize
 
   def index
-    @teachers = Teacher.active.order(:id).page(params[:page]).per(PAGE).decorate
+    @teachers = Teacher.filter(params.slice(:first_name)).order(:id).page(params[:page]).per(PAGE).decorate
   end
 
   def show; end

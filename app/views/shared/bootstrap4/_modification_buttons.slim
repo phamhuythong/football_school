@@ -1,0 +1,11 @@
+- modify_class ||= ''
+- remind_course_fee_url ||= ''
+- delete_url ||= ''
+.text-sm-right
+  - if remind_course_fee_url.present?
+    = link_to t('common.remind_course_fee'), remind_course_fee_url, class: "btn mr-sm-1 #{btn_delete} #{modify_class}"
+  - if policy(obj).edit?
+    = link_to t('buttons.edit'), edit_url, class: "btn #{btn_edit} #{modify_class}"
+  - if delete_url.present? && policy(obj).destroy?
+    = link_to t('buttons.delete'), delete_url, method: :delete, data: { confirm: t('confirmations.delete') },
+                                               class: "btn ml-sm-1 #{btn_delete} #{modify_class}"

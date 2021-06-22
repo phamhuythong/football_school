@@ -9,15 +9,14 @@
   tbody
     - @lessons.each_with_index do |obj, index|
       tr
-        th.align-middle= link_to format_date(obj.hold_date), course_lesson_path(params[:course_id], obj)
+        th.align-middle= link_to format_date(obj.hold_date), course_lesson_path(params[:course_id], obj), class: 'a-secondary'
         td.align-middle= format_date(obj.created_at)
         td.align-middle= obj.attendances
         td.align-middle= obj.absences
-        td= modification_buttons urls: { edit_url: edit_course_lesson_path(params[:course_id], obj) }
+        td= modification_buttons obj: obj, urls: { edit_url: edit_course_lesson_path(params[:course_id], obj) }
 
 = render 'shared/index', header: t('.lesson_list'), new_url: new_course_lesson_path(params[:course_id]), data: @lessons
 
-.container-fluid.mt-2
-  .row.mt-2
-    .col-sm
-      strong= link_to "< #{t('buttons.back')}", course_path(params[:course_id])
+.row.mt-2
+  .col-12 class="#{$breakpoint}-12"
+    strong= link_to "#{t('buttons.back')}", course_path(params[:course_id]), class: 'a-secondary'

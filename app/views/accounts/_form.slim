@@ -1,23 +1,44 @@
 = form_with model: form, url: url, method: method, local: true, class: 'teacher-form' do |f|
-  .row
-    .col-sm-4.col-xs-4
-      = text form: f, field: :last_name, field_name: t('common.last_name')
-    .col-sm-4.col-xs-4
-      = text form: f, field: :middle_name, field_name: t('common.middle_name')
-    .col-sm-4.col-xs-4
-      = text form: f, field: :first_name, field_name: t('common.first_name')
-  .row
-    .col-sm-4
-      = date form: f, field: :date_of_birth, field_name: t('common.dob')
-    .col-sm-4
-      = collection_radios form: f, field: :gender, collection: ['Nam', 'Nữ', 'Khác'], value_method: :to_s, text_method: :to_s,
-                    field_name: t('common.gender')
-    .col-xs-12.col-lg-4
-      .mt-sm-4
-        = file form: f, field: :avatar, field_name: t('common.avatar'), accept: '.jpg, .jpeg, .gif, .png, .webp'
-  .row
-    .col-sm-8
-      = text form: f, field: :address, field_name: t('common.address')
-    .col-sm-4
-      = text form: f, field: :phone, field_name: t('common.phone')
-  = submit form: f, back_url: teachers_path
+  .card-body
+    .row
+      .col-12 class="#{$breakpoint}-3"
+        = text form: f, field: :email, field_name: t('common.email')
+      .col-12 class="#{$breakpoint}-3"
+        = text form: f, field: :username, field_name: t('common.username')
+      .col-12 class="#{$breakpoint}-3"
+        = dropdown form: f, field: :type, field_name: t('common.user_type'),
+              collection: Account::TYPES, value_method: :to_s, text_method: :to_s, opts: {include_blank: false, prompt: t('common.user_type')}
+      .col-12 class="#{$breakpoint}-3"
+        = dropdown_multiple form: f, field: :roles, field_name: t('common.role'),
+               collection: form.all_roles, value_method: :name, text_method: :display_name, multiple: true,
+               opts: {include_blank: false}
+    - if form.new_record?
+      .row
+        .col-12 class="#{$breakpoint}-6"
+          = password form: f, field: :password, field_name: t('common.password')
+        .col-12 class="#{$breakpoint}-6"
+          = password form: f, field: :password_confirmation, field_name: t('common.password_confirmation')
+    .row
+      .col-12 class="#{$breakpoint}-4"
+        = text form: f, field: :last_name, field_name: t('common.last_name')
+      .col-12 class="#{$breakpoint}-4"
+        = text form: f, field: :middle_name, field_name: t('common.middle_name')
+      .col-12 class="#{$breakpoint}-4"
+        = text form: f, field: :first_name, field_name: t('common.first_name')
+    .row
+      .col-12 class="#{$breakpoint}-4"
+        = date form: f, field: :date_of_birth, field_name: t('common.dob')
+      .col-12 class="#{$breakpoint}-4"
+        = collection_radios form: f, field: :gender, collection: ['Nam', 'Nữ', 'Khác'], value_method: :to_s, text_method: :to_s,
+                      field_name: t('common.gender')
+    .row
+      .col-12 class="#{$breakpoint}-8"
+        = text form: f, field: :address, field_name: t('common.address')
+      .col-12 class="#{$breakpoint}-4"
+        = text form: f, field: :phone, field_name: t('common.phone')
+    .row
+      .col-12 class="#{$breakpoint}-3"
+        = file form: f, field: :avatar, field_name: t('common.avatar'), accept: '.jpg, .jpeg, .gif, .png, .webp', class_name: 'file-select'
+        = image_tag display_form_avatar(f.object.record), alt: 'avatar', class: 'img-thumbnail'
+  .card-footer
+    = submit form: f, back_url: accounts_path

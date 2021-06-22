@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_04_20_071956) do
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.string "email", null: false
+    t.string "email"
     t.string "username"
     t.string "password_digest"
     t.string "remember_digest"
@@ -30,9 +30,9 @@ ActiveRecord::Schema.define(version: 2021_04_20_071956) do
     t.text "avatar_data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_accounts_on_email", unique: true
+    t.index ["email"], name: "index_accounts_on_email"
     t.index ["password_digest"], name: "index_accounts_on_password_digest"
-    t.index ["username"], name: "index_accounts_on_username", unique: true
+    t.index ["username"], name: "index_accounts_on_username"
   end
 
   create_table "accounts_roles", id: false, force: :cascade do |t|
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 2021_04_20_071956) do
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
+    t.string "display_name"
     t.string "resource_type"
     t.bigint "resource_id"
     t.datetime "created_at", precision: 6, null: false
@@ -226,14 +227,14 @@ ActiveRecord::Schema.define(version: 2021_04_20_071956) do
   end
 
   create_table "teaching_management_stadia", force: :cascade do |t|
-    t.integer "account_id"
+    t.integer "teaching_management_id"
     t.integer "stadium_id"
     t.boolean "deleted", default: false
     t.integer "lock_version", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_id"], name: "index_teaching_management_stadia_on_account_id"
     t.index ["stadium_id"], name: "index_teaching_management_stadia_on_stadium_id"
+    t.index ["teaching_management_id"], name: "index_teaching_management_stadia_on_teaching_management_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -276,7 +277,7 @@ ActiveRecord::Schema.define(version: 2021_04_20_071956) do
   add_foreign_key "student_receipts", "users", column: "student_id"
   add_foreign_key "teacher_courses", "courses"
   add_foreign_key "teacher_courses", "users", column: "teacher_id"
-  add_foreign_key "teaching_management_stadia", "accounts"
   add_foreign_key "teaching_management_stadia", "stadia"
+  add_foreign_key "teaching_management_stadia", "users", column: "teaching_management_id"
   add_foreign_key "users", "accounts"
 end

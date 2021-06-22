@@ -1,5 +1,5 @@
 = content_for :filter_object do
-  .col-sm-3.d-flex.align-middle
+  .col-12.d-flex.align-middle class="#{$breakpoint}-3"
     = render partial: 'shared/index_filter_form', locals: { url: courses_path, field: :stadium, collection: @stadia, value_method: :id,
                                                   text_method: :name, field_name: t('stadia.all_stadia'), selected: params[:stadium] }
 
@@ -14,12 +14,12 @@
   tbody
     - @courses.each_with_index do |obj, index|
       tr
-        th.align-middle= link_to obj.name, course_path(obj)
+        th.align-middle= link_to obj.name, course_path(obj), class: 'a-secondary'
         td.align-middle= obj.teachers_by_ids
         td.align-middle= obj.stadium&.name
         td.align-middle= obj.student_courses.select { |c| c.deleted == false }.size
         td
           - if policy(obj).edit?
-            = modification_buttons urls: { edit_url: edit_course_path(obj), delete_url: course_path(obj) }
+            = modification_buttons obj: obj, urls: { edit_url: edit_course_path(obj), delete_url: course_path(obj) }
 
 = render 'shared/index', header: t('.course_list'), new_url: new_course_path, data: @courses

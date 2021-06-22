@@ -1,34 +1,38 @@
-.container-fluid.mt-2
-  .row
-    .col-xs-12.col-lg-12
-      .text-sm-center
-        h2= @student.full_name
-  .row.mt-2
-    .col-xs-12.col-lg-4
-      = "#{t('common.dob')}: #{format_date(@student.date_of_birth)}"
-    .col-xs-12.col-lg-4
-      = "#{t('common.gender')}: #{@student.gender}"
-  .row
-    .col-xs-12.col-lg-8
-      = "#{t('common.address')}: #{@student.address}"
-    .col-xs-12.col-lg-4
-      = "#{t('common.phone')}: #{@student.phone}"
-  .row
-    .col-xs-12.col-lg-4
-      = "#{t('common.mother_name')}: #{@student.mother_name}"
-    .col-xs-12.col-lg-4
-      = "#{t('common.mother_phone')}: #{@student.mother_phone}"
-  .row
-    .col-xs-12.col-lg-4
-      = "#{t('common.father_name')}: #{@student.father_name}"
-    .col-xs-12.col-lg-4
-      = "#{t('common.father_phone')}: #{@student.father_phone}"
-  .row.mt-2
-    .col-xs-12.col-lg-2
-      = link_to t('students.course_list'), student_student_courses_path(@student), class: "btn btn-sm #{btn_general}"
-    .col-xs-12.col-lg-2
-      = link_to t('common.receipt_list'), student_student_receipts_path(@student), class: "btn btn-sm #{btn_general}"
-  .row.mt-2
-    .col-xs-12.col-lg-12
-      - back_url = params[:course_id] ? course_path(params[:course_id]) : students_path
-      strong= link_to "< #{t('buttons.back')}", back_url
+.row
+  .col-12 class="#{$breakpoint}-12"
+    .card.card-secondary
+      .card-header
+        .text-center
+          h2= @student.full_name
+      .card-body
+        .row
+          .col-12 class="#{$breakpoint}-4"
+            = "#{t('common.dob')}: #{format_date(@student.date_of_birth)}"
+          .col-12 class="#{$breakpoint}-4"
+            = "#{t('common.gender')}: #{@student.gender}"
+        .row
+          .col-12 class="#{$breakpoint}-4"
+            = "#{t('common.address')}: #{@student.address}"
+          .col-12 class="#{$breakpoint}-4"
+            = "#{t('common.email')}: #{@student.email}"
+          .col-12 class="#{$breakpoint}-4"
+            = "#{t('common.phone')}: #{@student.phone}"
+        .row
+          .col-12 class="#{$breakpoint}-4"
+            = "#{t('common.mother_name')}: #{@student.mother_name}"
+          .col-12 class="#{$breakpoint}-4"
+            = "#{t('common.mother_phone')}: #{@student.mother_phone}"
+        .row
+          .col-12 class="#{$breakpoint}-4"
+            = "#{t('common.father_name')}: #{@student.father_name}"
+          .col-12 class="#{$breakpoint}-4"
+            = "#{t('common.father_phone')}: #{@student.father_phone}"
+        .row.mt-2
+          .col-12 class="#{$breakpoint}-2"
+            = link_to t('students.course_list'), student_student_courses_path(@student), class: "btn btn-sm #{btn_general}"
+          .col-12 class="#{$breakpoint}-2"
+            = link_to t('common.receipt_list'), student_student_receipts_path(@student), class: "btn btn-sm #{btn_general}"
+        .row.mt-2
+          .col-12 class="#{$breakpoint}-12"
+            - back_url = params[:course_id] ? course_path(params[:course_id]) : students_path
+            strong= link_to "#{t('buttons.back')}", back_url, class: 'a-secondary'

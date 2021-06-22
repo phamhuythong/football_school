@@ -28,7 +28,7 @@ class StadiumForm < BaseForm
 
   def save
     if valid?
-      Stadium.create!(attributes_for_active_record)
+      Stadium.create!(attributes_for_record)
       true
     else
       false
@@ -37,7 +37,7 @@ class StadiumForm < BaseForm
 
   def update
     if valid?
-      record.update!(attributes_for_active_record)
+      record.update!(attributes_for_record)
       true
     else
       false

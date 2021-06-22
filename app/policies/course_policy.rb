@@ -2,13 +2,14 @@
 
 class CoursePolicy < ApplicationPolicy
   def index?
-    true
+    account.admin? || account.teaching_management || account.teacher?
   end
 
   def show?
     return true if account.admin?
+
     if account.teaching_management?
-      account.teaching_management_stadia.map(&:stadium_id).include? record.stadium_id
+      account.teaching_management.teaching_management_stadia.map(&:stadium_id).include? record.stadium_id
     else
       account.teacher.teacher_courses.active.map(&:course_id).include? record.id
     end
@@ -27,7 +28,7 @@ class CoursePolicy < ApplicationPolicy
       if account.teacher?
         scope.by_teacher(account.teacher.id).order(:id)
       elsif account.teaching_management?
-        stadium_ids = account.teaching_management_stadia.map(&:stadium_id)
+        stadium_ids = account.teaching_management.teaching_management_stadia.map(&:stadium_id)
         scope.by_stadiums(stadium_ids).order(:id)
       else
         scope.active.all.order(:id)

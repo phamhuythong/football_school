@@ -34,7 +34,7 @@ class TeacherForm < BaseForm
   def save
     if valid?
       self.code = "DM-GV-#{rand(RANDOM_LIMIT).to_s.rjust(ZERO_RJUST, '0')}"
-      Teacher.create!(attributes_for_active_record)
+      Teacher.create!(attributes_for_record)
       true
     else
       false
@@ -43,7 +43,7 @@ class TeacherForm < BaseForm
 
   def update
     if valid?
-      record.update!(attributes_for_active_record)
+      record.update!(attributes_for_record)
       true
     else
       false
@@ -56,8 +56,8 @@ class TeacherForm < BaseForm
   end
 
   def uploaded_avatar
-    self.avatar_attacher.errors.each do |error|
-      self.errors.add(:avatar, error)
+    avatar_attacher.errors.each do |error|
+      errors.add(:avatar, error)
     end
   end
 end

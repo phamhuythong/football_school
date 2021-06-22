@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 class StudentsController < ApplicationController
-  before_action :pundit_authorize
-  before_action :merge_current_user, only: [:new, :create, :edit, :update]
+  before_action :merge_current_user, only: %i[new create edit update]
 
   def index
-    @students = Student.filter(params.slice(:course,
-                                            :first_name)).order(:id).page(params[:page]).per(PAGE).decorate
-    @courses = Course.active.order(:id)
+    authorize Student
+    @students = policy_scope(Student.filter(params.slice(:course, :first_name))).order(:id).page(params[:page]).per(PAGE).decorate
+    @courses = policy_scope(Course)
   end
 
   def show
     @student = Student.active.find(params[:id])
+    authorize @student
     @student_courses = @student.student_courses.active.includes(:course)
   end
 
@@ -29,10 +29,14 @@ class StudentsController < ApplicationController
   end
 
   def edit
+    @student = Student.active.find(params[:id])
+    authorize @student
     @form = StudentForm.build(params)
   end
 
   def update
+    @student = Student.active.find(params[:id])
+    authorize @student
     @form = StudentForm.build(params)
     if @form.save
       redirect_after_save(params)
@@ -43,6 +47,7 @@ class StudentsController < ApplicationController
 
   def destroy
     @student = Student.active.find(params[:id])
+    authorize @student
     @student.update!(deleted: true)
     redirect_to students_path, notice: I18n.t('notices.delete')
   end
@@ -52,10 +57,6 @@ class StudentsController < ApplicationController
   def redirect_after_save(params)
     back_url = params[:course_id] ? course_path(params[:course_id]) : students_path
     redirect_to back_url, notice: I18n.t('notices.save')
-  end
-
-  def pundit_authorize
-    authorize Student
   end
 
   def merge_current_user

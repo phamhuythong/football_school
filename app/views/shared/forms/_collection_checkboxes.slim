@@ -2,10 +2,11 @@
 - class_name ||= ''
 .form-group
   = f.label field_name
-  .form-control.form-control-no-border
+  .row
     = f.collection_check_boxes field, collection, value_method, text_method, {}, {class: "custom-control-input #{class_name}"} do |c|
-      .custom-control.custom-checkbox.custom-control-inline
-        = c.check_box
-        = c.label class: 'custom-control-label'
+      .col-12.checkbox-resize class="#{$breakpoint}-4"
+        .custom-control.custom-checkbox.custom-control-inline
+          = c.check_box
+          = c.label class: 'custom-control-label'
   - f.object.errors.full_messages_for(field).each do |message|
     .invalid-feedback= message

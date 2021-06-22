@@ -1,0 +1,3 @@
+= content_for :form do
+  = render partial: 'assign_stadium_form', locals: { form: @form, url: process_assign_stadium_account_url, method: :post}
+= render 'shared/form_page', title: t('.title')

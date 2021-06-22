@@ -23,9 +23,10 @@
 
 class User < ApplicationRecord
   include Scopeable
+  include Filterable
   include ImageUploader[:avatar]
 
-  belongs_to :account, optional: true, inverse_of: :users
+  belongs_to :account, optional: true, inverse_of: :user
 
   # has_one_attached :avatar
 
@@ -34,6 +35,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :date_of_birth, format: { with: /\d{4}-\d{2}-\d{2}/,
                                       message: I18n.t('errors.messages.invalid_date') }, allow_nil: true
+
+  scope :by_first_name, ->(first_name) { active.where('lower(first_name) LIKE ?', "%#{first_name}%") }
 
   def full_name
     [last_name, middle_name, first_name].compact.join(' ')

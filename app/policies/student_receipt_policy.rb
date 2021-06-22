@@ -9,19 +9,11 @@ class StudentReceiptPolicy < ApplicationPolicy
     true
   end
 
-  def new?
-    create?
-  end
-
   def create?
-    return true if account.admin? || account.teaching_management?
-  end
-
-  def edit?
-    update?
+    account.admin? || account.teaching_management?
   end
 
   def update?
-    return true if account.admin? || account.teaching_management?
+    account.admin? || account.teaching_management?
   end
 end

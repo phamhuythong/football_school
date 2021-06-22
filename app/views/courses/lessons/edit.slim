@@ -1,6 +1,3 @@
-.container-fluid
-  .row
-    .col-sm
-      .text-center
-        h2= t('.title')
-  = render 'form', form: @form, url: course_lesson_url, method: :patch
+= content_for :form do
+  = render partial: 'form', locals: { form: @form, url: course_lesson_url, method: :patch}
+= render 'shared/form_page', title: t('.title')

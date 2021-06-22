@@ -54,6 +54,11 @@ vi:
     avatar: Hình Đại Diện
     email: Email
     username: Username
+    password: Mật Khẩu
+    password_confirmation: Xác nhận Mật Khẩu
+    user_type: User Type
+    email_username: Email or Username
+    assign_stadium: Quản Lý Sân
   buttons:
     logout: Đăng Xuất
     new: Thêm
@@ -98,6 +103,10 @@ vi:
     errors:
       messages:
         record_invalid: record không hợp lệ
+  roles:
+    admin: admin
+    teacher: giáo viên
+    teaching_management: giáo vụ
   views:
     pagination:
       first: '<<'

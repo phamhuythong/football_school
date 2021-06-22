@@ -1,0 +1,43 @@
+@import 'bootstrap';
+@import "select2/dist/css/select2";
+@import 'admin-lte';
+@import '@fortawesome/fontawesome-free';
+@import 'override_bootstrap';
+@import 'override_select2';
+/*@import './plugins/vanillaSelectBox';*/
+
+.img-avatar {
+  height: auto;
+  width: 2.1rem;
+}
+
+.img-thumbnail {
+  width: 100px;
+}
+
+.img-login-logo {
+  width: 100px;
+  height: 100px;
+}
+
+.a-secondary {
+  color: #212529 !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+.checkbox-resize{
+  min-width: 22px !important;
+  min-height: 22px !important;
+  .custom-control-label::before,.custom-control-label::after{
+    width: 22px !important;
+    height: 22px !important;
+    top: 1px;
+  }
+}
+
+.login-icheck {
+  padding-top: 6px !important;
+}

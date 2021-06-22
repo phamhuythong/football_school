@@ -2,6 +2,7 @@
 
 class Courses::LessonsController < ApplicationController
   def index
+    authorize Lesson
     @lessons = Lesson.by_course(params[:course_id]).order(hold_date: :desc).page(params[:page]).per(PAGE)
   end
 
@@ -13,10 +14,12 @@ class Courses::LessonsController < ApplicationController
   end
 
   def new
+    authorize Lesson
     @form = Courses::LessonForm.build(params)
   end
 
   def create
+    authorize Lesson
     @form = Courses::LessonForm.build(params)
     if @form.save
       redirect_after_save(params)
@@ -26,10 +29,14 @@ class Courses::LessonsController < ApplicationController
   end
 
   def edit
+    @lesson = Lesson.find(params[:id])
+    authorize @lesson
     @form = Courses::LessonForm.build(params)
   end
 
   def update
+    @lesson = Lesson.find(params[:id])
+    authorize @lesson
     @form = Courses::LessonForm.build(params)
     if @form.save
       redirect_after_save(params)
@@ -39,6 +46,8 @@ class Courses::LessonsController < ApplicationController
   end
 
   def destroy
+    @lesson = Lesson.find(params[:id])
+    authorize @lesson
     # @student_course = StudentCourse.find(params[:id])
     # @student_course.update!(deleted: true)
     # back_url = params[:course_id] ? course_path(params[:course_id]) : students_path(params[:student_id])

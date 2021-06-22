@@ -83,12 +83,12 @@ class StudentForm < BaseForm
 
   def create!
     self.code = "DM-HV-#{rand(RANDOM_LIMIT).to_s.rjust(ZERO_RJUST, '0')}"
-    self.record = Student.create!(attributes_for_active_record)
+    self.record = Student.create!(attributes_for_record)
     record.avatar.attach(args[:student_form][:avatar]) if args[:student_form][:avatar].present?
   end
 
   def update!
-    record.update!(attributes_for_active_record)
+    record.update!(attributes_for_record)
     record.avatar.attach(args[:student_form][:avatar]) if args[:student_form][:avatar].present?
   end
 
@@ -104,13 +104,14 @@ class StudentForm < BaseForm
   end
 
   def uploaded_avatar
-    self.avatar_attacher.errors.each do |error|
-      self.errors.add(:avatar, error)
+    avatar_attacher.errors.each do |error|
+      errors.add(:avatar, error)
     end
   end
 
   def valid_course_id
     return true if args[:current_user].admin?
+
     stadium_ids = args[:current_user].teaching_management_stadia.active.map(&:stadium_id)
     course = Course.find(course_id)
     stadium_ids.include? course.stadium_id

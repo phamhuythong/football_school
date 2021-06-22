@@ -23,7 +23,7 @@ class CourseCategoryForm < BaseForm
 
   def save
     if valid?
-      CourseCategory.create!(attributes_for_active_record)
+      CourseCategory.create!(attributes_for_record)
       true
     else
       false
@@ -32,7 +32,7 @@ class CourseCategoryForm < BaseForm
 
   def update
     if valid?
-      record.update!(attributes_for_active_record)
+      record.update!(attributes_for_record)
       true
     else
       false

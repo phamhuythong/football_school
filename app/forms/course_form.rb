@@ -75,11 +75,11 @@ class CourseForm < BaseForm
   end
 
   def create!
-    Course.create!(attributes_for_active_record)
+    Course.create!(attributes_for_record)
   end
 
   def update!
-    record.update!(attributes_for_active_record)
+    record.update!(attributes_for_record)
   end
 
   def save_association

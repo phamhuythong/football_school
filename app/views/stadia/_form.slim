@@ -1,6 +1,12 @@
 = form_with model: form, url: url, method: method, local: true, class: 'stadia-form' do |f|
-  = dropdown form: f, field: :stadium_group_id, field_name: t('common.stadium_group'),
-             collection: form.stadium_groups, value_method: :id, text_method: :name, class_name: 'select-form'
-  = text form: f, field: :name, field_name: t('common.stadium')
-  = text form: f, field: :address, field_name: t('common.address')
-  = submit form: f, back_url: stadia_path
+  .card-body
+    .row
+      .col-12 class="#{$breakpoint}-3"
+        = dropdown form: f, field: :stadium_group_id, field_name: t('common.stadium_group'),
+                   collection: form.stadium_groups, value_method: :id, text_method: :name, class_name: 'select-form'
+      .col-12 class="#{$breakpoint}-3"
+        = text form: f, field: :name, field_name: t('common.stadium')
+      .col-12 class="#{$breakpoint}-6"
+        = text form: f, field: :address, field_name: t('common.address')
+  .card-footer
+    = submit form: f, back_url: stadia_path

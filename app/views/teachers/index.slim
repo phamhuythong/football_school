@@ -1,16 +1,21 @@
+= content_for :search_object do
+  .col-12.d-flex.align-middle class="#{$breakpoint}-3"
+    = render partial: 'shared/index_search_form', locals: { url: teachers_path, field: :first_name, field_name: t('common.first_name'),
+                                          value: params[:first_name] }
+
 = content_for :table_body do
   thead
     tr
-      th scope='col' #
+      / th scope='col' #
       th scope='col' = t('common.teacher')
       th scope='col'
   tbody
     - @teachers.each_with_index do |obj, index|
       tr
-        td.align-middle= obj.code
+        / td.align-middle= obj.code
         td.align-middle
           = image_tag obj.user_avatar, alt: 'avatar', class: "#{image_avatar}"
-          = obj.full_name
-        td= modification_buttons urls: { edit_url: edit_teacher_path(obj), delete_url: teacher_path(obj) }
+          = " #{obj.full_name}"
+        td= modification_buttons obj: obj, urls: { edit_url: edit_teacher_path(obj) }
 
-= render 'shared/index', header: t('.teacher_list'), new_url: new_teacher_path, data: @teachers
+= render 'shared/index', header: t('.teacher_list'), new_url: new_account_path, data: @teachers

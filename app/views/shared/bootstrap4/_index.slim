@@ -1,0 +1,22 @@
+- paging = true if local_assigns[:paging].nil?
+.container-fluid.mt-2
+  .row
+    .col-12 class="#{$breakpoint}-12"
+      .text-sm-center
+        h2= header
+      .row
+        - if policy(controller_name.classify.constantize.new).new?
+          .col-sm-1.d-flex.align-middle
+            = link_to t('buttons.new'), new_url, class: "btn #{btn_new}"
+        = content_for :filter_object
+        = content_for :search_object
+
+  .row.mt-2
+    .col-12 class="#{$breakpoint}-12"
+      .table-responsive-sm
+        table.table class=table_style
+          = content_for :table_body
+  - if paging
+    .row
+      .col-12.d-flex.justify-content-end class="#{$breakpoint}-12"
+        = paginate data

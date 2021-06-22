@@ -22,9 +22,6 @@
 # t.index ["account_id"], name: "index_users_on_account_id"
 
 class Student < User
-  include Scopeable
-  include Filterable
-
   has_many :student_courses, class_name: 'StudentCourse'
   has_many :courses, through: :student_courses, class_name: 'Course', foreign_key: :course_id
   has_many :lesson_absences, inverse_of: :student
@@ -36,6 +33,9 @@ class Student < User
                        joins(:courses).where(courses: { stadium_id: stadium_id },
                                              student_courses: { deleted: false })
                      }
+  scope :by_stadiums, lambda { |stadium_ids|
+                        joins(:courses).where(courses: { stadium_id: stadium_ids },
+                                              student_courses: { deleted: false })
+                      }
   scope :by_course, ->(course_id) { joins(:courses).where(courses: { id: course_id }, student_courses: { deleted: false }) }
-  scope :by_first_name, ->(first_name) { where('lower(first_name) = ?', first_name.downcase) }
 end

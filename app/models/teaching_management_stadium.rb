@@ -12,6 +12,6 @@
 class TeachingManagementStadium < ApplicationRecord
   include Scopeable
 
-  belongs_to :account, inverse_of: :teaching_management_stadia
+  belongs_to :teaching_management, inverse_of: :teaching_management_stadia
   belongs_to :stadium, inverse_of: :teaching_management_stadia
 end

@@ -1,0 +1,8 @@
+= form_with model: form, url: url, method: method, local: true, class: 'assign-stadium-form' do |f|
+  .card-body
+    .row
+      .col-12 class="#{$breakpoint}-12"
+        = collection_checkboxes form: f, field: :stadium_ids, field_name: t('common.stadium'),
+                                collection: form.stadia, value_method: :id, text_method: :name, class_name: 'checkboxes-stadium'
+  .card-footer
+    = submit form: f, back_url: accounts_path

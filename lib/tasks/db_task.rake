@@ -10,7 +10,9 @@ namespace :db do
     ActiveRecord::Base.transaction do
       puts "******Initialize roles************"
       Role::ROLES.each do |k, v|
-        puts "Imported role #{v.capitalize}" if Role.find_or_create_by!(name: v)
+        role = Role.find_or_create_by!(name: v)
+        role.update(display_name: I18n.t("roles.#{v}"))
+        puts "Imported role #{role.display_name}"
       end
       puts "******COMPLETED******************"
     rescue => e
